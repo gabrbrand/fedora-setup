@@ -37,6 +37,7 @@ git config --global user.name "Gabriel Brand"
 git config --global user.email gabr.brand@gmail.com
 
 #Install Anki
+cd ~
 wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.50/anki-2.1.50-linux-qt6.tar.zst
 sudo dnf -y install zstd
 tar xaf ~/Downloads/anki-2.1.50-linux-qt6.tar.zst
@@ -159,4 +160,4 @@ cd ~/Downloads/linux-brprinter
 gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
 cd ~
-rm -r ~/Downloads/linux-brprinter
+sudo rm -r ~/Downloads/linux-brprinter
