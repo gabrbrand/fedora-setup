@@ -61,6 +61,9 @@ flatpak install flathub com.mattjakeman.ExtensionManager
 #Install Foliate (rpm)
 sudo dnf -y install foliate
 
+#Install Furtherance (flatpak)
+flatpak install flathub com.lakoliu.Furtherance
+
 #Install Geary (rpm)
 sudo dnf -y install geary
 
@@ -150,8 +153,10 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 #Install Printer Driver
-wget -P ~/Downloads https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
-cd ~/Downloads
+mkdir ~/Downloads/linux-brprinter
+wget -P ~/Downloads/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
+cd ~/Downloads/linux-brprinter
 gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
 cd ~
+rm -r ~/Downloads/linux-brprinter
