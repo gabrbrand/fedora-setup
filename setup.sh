@@ -48,22 +48,22 @@ rm -r ~/anki-2.1.50-linux-qt6
 rm ~/Downloads/anki-2.1.50-linux-qt6.tar.zst
 
 #Install BlueJ (flatpak)
-flatpak install flathub org.bluej.BlueJ
+flatpak -y --noninteractive install flathub org.bluej.BlueJ
 
 #Install Google Chrome (rpm)
 sudo dnf -y install google-chrome-stable
 
 #Install Clapper (flatpak)
-flatpak install flathub com.github.rafostar.Clapper
+flatpak -y --noninteractive install flathub com.github.rafostar.Clapper
 
 #Install Extension Manager (flatpak)
-flatpak install flathub com.mattjakeman.ExtensionManager
+flatpak -y --noninteractive install flathub com.mattjakeman.ExtensionManager
 
 #Install Foliate (rpm)
 sudo dnf -y install foliate
 
 #Install Furtherance (flatpak)
-flatpak install flathub com.lakoliu.Furtherance
+flatpak -y --noninteractive install flathub com.lakoliu.Furtherance
 
 #Install Geary (rpm)
 sudo dnf -y install geary
@@ -75,16 +75,16 @@ sudo dnf -y install gimp
 sudo dnf -y install keepassxc
 
 #Install Marktext (flatpak)
-flatpak install flathub com.github.marktext.marktext
+flatpak -y --noninteractive install flathub com.github.marktext.marktext
 
 #Install Poedit (flatpak)
-flatpak install flathub net.poedit.Poedit
+flatpak -y --noninteractive install flathub net.poedit.Poedit
 
 #Install Spotify (flatpak)
-flatpak install flathub com.spotify.Client
+flatpak -y --noninteractive install flathub com.spotify.Client
 
 #Install Thunderbird (flatpak)
-flatpak install flathub org.mozilla.Thunderbird
+flatpak -y --noninteractive install flathub org.mozilla.Thunderbird
 
 #Install Tutanota (AppImage)
 mkdir ~/.Applications
@@ -118,7 +118,7 @@ cd ~/adw-gtk3
 meson build
 sudo ninja -C build install
 gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
-flatpak install org.gtk.Gtk3theme.adw-gtk3-dark
+flatpak -y --noninteractive install org.gtk.Gtk3theme.adw-gtk3-dark
 cd ~
 sudo rm -r ~/adw-gtk3
 
