@@ -156,6 +156,28 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 #Install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+#Update .zshrc
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"\
+DEFAULT_USER=$USER/' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+
+#Add aliases
+echo "
+#git
+alias clone=\"git clone\"
+alias push=\"git push\"
+alias pull=\"git pull\"
+alias commit=\"git commit -m\"
+alias add=\"git add --all\"
+
+alias open=\"xdg-open\"
+alias shutdown=\"sudo shutdown -h now\"" >> ~/.zshrc
+
+sudo dnf alias add in=install
+sudo dnf alias add rm=remove
+sudo dnf alias add if=info
+sudo dnf alias add se=search
+
 #Install Printer Driver
 mkdir ~/Downloads/linux-brprinter
 wget -P ~/Downloads/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
