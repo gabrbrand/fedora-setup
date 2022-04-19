@@ -5,6 +5,9 @@ echo "fastestmirror=True
 max_parallel_downloads=10
 defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf
 
+#Install Updates
+sudo dnf -q -y update
+
 #Remove Cheese (rpm)
 sudo dnf -q -y remove cheese
 
