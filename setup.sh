@@ -90,7 +90,7 @@ flatpak --noninteractive -y install flathub com.spotify.Client
 #Install Thunderbird (flatpak)
 flatpak --noninteractive -y install flathub org.mozilla.Thunderbird
 
-#Install Tutanota (AppImage)
+#Install and run Tutanota (AppImage)
 mkdir ~/.Applications
 wget -P ~/.Applications -q https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 cd ~/.Applications
