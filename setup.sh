@@ -56,6 +56,12 @@ flatpak -y install flathub org.bluej.BlueJ
 #Install Google Chrome (rpm)
 sudo dnf -y install google-chrome-stable
 
+#Install GitHub CLI (rpm)
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install gh
+gh auth login
+
 #Install Clapper (flatpak)
 flatpak -y install flathub com.github.rafostar.Clapper
 
