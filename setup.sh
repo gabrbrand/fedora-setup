@@ -39,6 +39,9 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 git config --global user.name "Gabriel Brand"
 git config --global user.email gabr.brand@gmail.com
 
+#Install Amberol (flatpak)
+flatpak -y install flathub io.bassi.Amberol
+
 #Install Anki
 wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.50/anki-2.1.50-linux-qt6.tar.zst
 sudo dnf -y install zstd
