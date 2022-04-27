@@ -43,15 +43,15 @@ git config --global user.email gabr.brand@gmail.com
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
-wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.50/anki-2.1.50-linux-qt6.tar.zst
+wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.51/anki-2.1.51-linux-qt6.tar.zst
 sudo dnf -y install zstd
 cd ~
-tar xaf ~/Downloads/anki-2.1.50-linux-qt6.tar.zst
-cd ~/anki-2.1.50-linux-qt6
+tar xaf ~/Downloads/anki-2.1.51-linux-qt6.tar.zst
+cd ~/anki-2.1.51-linux-qt6
 sudo ./install.sh
 cd ~
-rm -r ~/anki-2.1.50-linux-qt6
-rm ~/Downloads/anki-2.1.50-linux-qt6.tar.zst
+rm -r ~/anki-2.1.51-linux-qt6
+rm ~/Downloads/anki-2.1.51-linux-qt6.tar.zst
 
 #Install BlueJ (flatpak)
 flatpak -y install flathub org.bluej.BlueJ
@@ -64,6 +64,13 @@ sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf -y install gh
 gh auth login
+
+#Set aliases for GitHub CLI
+gh alias set rv 'repo view'
+gh alias set il 'issue list'
+gh alias set iv 'issue view'
+gh alias set pl 'pr list'
+gh alias set pv 'pr view'
 
 #Install Clapper (flatpak)
 flatpak -y install flathub com.github.rafostar.Clapper
@@ -245,9 +252,16 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 #Install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+#Install fonts
+mkdir -p ~/.local/share/fonts
+wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+fc-cache -f -v
+
+#Install Powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
 #Update .zshrc
-sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"\
-DEFAULT_USER=$USER/' ~/.zshrc
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k/powerlevel10k"/' ~/.zshrc
 sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
 #Add aliases
