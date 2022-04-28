@@ -65,7 +65,7 @@ sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.re
 sudo dnf -y install gh
 gh auth login
 
-#Set aliases for GitHub CLI
+#Set GitHub CLI aliases
 gh alias set rv 'repo view'
 gh alias set il 'issue list'
 gh alias set iv 'issue view'
@@ -261,7 +261,7 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #Update .zshrc
-sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k/powerlevel10k"/' ~/.zshrc
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
 sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
 #Add aliases
@@ -276,6 +276,7 @@ alias add=\"git add --all\"
 alias open=\"xdg-open\"
 alias shutdown=\"sudo shutdown -h now\"" >> ~/.zshrc
 
+#Add dnf aliases
 sudo dnf alias add in=install
 sudo dnf alias add rm=remove
 sudo dnf alias add if=info
