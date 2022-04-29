@@ -63,7 +63,7 @@ sudo dnf -y install google-chrome-stable
 sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf -y install gh
-gh auth login
+#gh auth login
 
 #Set GitHub CLI aliases
 gh alias set rv 'repo view'
@@ -75,9 +75,14 @@ gh alias set pv 'pr view'
 #Install Clapper (flatpak)
 flatpak -y install flathub com.github.rafostar.Clapper
 
-#Install and run Extension Manager (flatpak)
+#Install Dynamic Wallpaper (flatpak)
+flatpak install flathub me.dusansimic.DynamicWallpaper
+
+#Install Extension Manager (flatpak)
 flatpak -y install flathub com.mattjakeman.ExtensionManager
-flatpak run com.mattjakeman.ExtensionManager
+
+#Install Feeds (flatpak)
+flatpak install flathub org.gabmus.gfeeds
 
 #Install Foliate (rpm)
 sudo dnf -y install foliate
@@ -106,12 +111,11 @@ flatpak -y install flathub com.spotify.Client
 #Install Thunderbird (flatpak)
 flatpak -y install flathub org.mozilla.Thunderbird
 
-#Install and run Tutanota (AppImage)
+#Install Tutanota (AppImage)
 mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 cd ~/.Applications
 chmod +x tutanota-desktop-linux.AppImage
-./tutanota-desktop-linux.AppImage
 cd ~
 
 #Install Tweaks (rpm)
@@ -252,7 +256,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 #Install zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-#Install fonts
+#Install MesloLGS NF
 mkdir -p ~/.local/share/fonts
 wget -P ~/.local/share/fonts https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 fc-cache -f -v
