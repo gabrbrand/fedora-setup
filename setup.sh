@@ -76,13 +76,13 @@ gh alias set pv 'pr view'
 flatpak -y install flathub com.github.rafostar.Clapper
 
 #Install Dynamic Wallpaper (flatpak)
-flatpak install flathub me.dusansimic.DynamicWallpaper
+flatpak -y install flathub me.dusansimic.DynamicWallpaper
 
 #Install Extension Manager (flatpak)
 flatpak -y install flathub com.mattjakeman.ExtensionManager
 
 #Install Feeds (flatpak)
-flatpak install flathub org.gabmus.gfeeds
+flatpak -y install flathub org.gabmus.gfeeds
 
 #Install Foliate (rpm)
 sudo dnf -y install foliate
