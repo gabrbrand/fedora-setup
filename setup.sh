@@ -32,6 +32,9 @@ sudo dnf -y remove gnome-tour
 #Remove Videos (rpm)
 sudo dnf -y remove totem
 
+#Remove unused system extensions
+sudo rm -r apps-menu@gnome-shell-extensions.gcampax.github.com background-logo@fedorahosted.org places-menu@gnome-shell-extensions.gcampax.github.com window-list@gnome-shell-extensions.gcampax.github.com
+
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -56,14 +59,11 @@ rm ~/Downloads/anki-2.1.51-linux-qt6.tar.zst
 #Install BlueJ (flatpak)
 flatpak -y install flathub org.bluej.BlueJ
 
-#Install Google Chrome (rpm)
-sudo dnf -y install google-chrome-stable
-
 #Install GitHub CLI (rpm)
 sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf -y install gh
-#gh auth login
+gh auth login
 
 #Set GitHub CLI aliases
 gh alias set rv 'repo view'
