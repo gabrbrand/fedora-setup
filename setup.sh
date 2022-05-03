@@ -223,6 +223,10 @@ sudo rm -r ~/adw-gtk3
 wget -qO- https://git.io/papirus-icon-theme-install | sh
 gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 
+#Install Papirus Folders
+wget -qO- https://git.io/papirus-folders-install | sh
+papirus-folders -C adwaita
+
 #Install bpytop (rpm)
 sudo dnf -y install bpytop
 
