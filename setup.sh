@@ -130,7 +130,7 @@ sudo dnf -y install ulauncher
 #Install Adwaita Dark Ulaucher
 mkdir -p ~/.config/ulauncher/user-themes
 cd ~/.config/ulauncher/user-themes
-git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git
+git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
 cd ~
 
 #Configure Ulauncher settings
