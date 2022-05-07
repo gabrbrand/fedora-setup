@@ -33,7 +33,9 @@ sudo dnf -y remove gnome-tour
 sudo dnf -y remove totem
 
 #Remove unused system extensions
+cd /usr/share/gnome-shell
 sudo rm -r apps-menu@gnome-shell-extensions.gcampax.github.com background-logo@fedorahosted.org places-menu@gnome-shell-extensions.gcampax.github.com window-list@gnome-shell-extensions.gcampax.github.com
+cd ~
 
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
