@@ -33,7 +33,7 @@ sudo dnf -y remove gnome-tour
 sudo dnf -y remove totem
 
 #Remove unused system extensions
-cd /usr/share/gnome-shell
+cd /usr/share/gnome-shell/extensions
 sudo rm -r apps-menu@gnome-shell-extensions.gcampax.github.com background-logo@fedorahosted.org places-menu@gnome-shell-extensions.gcampax.github.com window-list@gnome-shell-extensions.gcampax.github.com
 cd ~
 
@@ -49,7 +49,6 @@ flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
 wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.51/anki-2.1.51-linux-qt6.tar.zst
-sudo dnf -y install zstd
 cd ~
 tar xaf ~/Downloads/anki-2.1.51-linux-qt6.tar.zst
 cd ~/anki-2.1.51-linux-qt6
