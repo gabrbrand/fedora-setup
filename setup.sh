@@ -129,7 +129,7 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 #Install Ulauncher (rpm)
 sudo dnf -y install ulauncher
 
-#Install Adwaita Dark Ulaucher
+#Install Adwaita Dark Ulauncher
 mkdir -p ~/.config/ulauncher/user-themes
 cd ~/.config/ulauncher/user-themes
 git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
@@ -291,6 +291,9 @@ sudo dnf alias add in=install
 sudo dnf alias add rm=remove
 sudo dnf alias add if=info
 sudo dnf alias add se=search
+
+#Change Hostname
+sudo hostnamectl set-hostname "notebook-gabriel"
 
 #Set keyboard shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
