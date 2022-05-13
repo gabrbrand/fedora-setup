@@ -48,14 +48,14 @@ git config --global user.email gabr.brand@gmail.com
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
-wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.51/anki-2.1.51-linux-qt6.tar.zst
+wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
 cd ~
-tar xaf ~/Downloads/anki-2.1.51-linux-qt6.tar.zst
-cd ~/anki-2.1.51-linux-qt6
+tar xaf ~/Downloads/anki-2.1.52-linux-qt6.tar.zst
+cd ~/anki-2.1.52-linux-qt6
 sudo ./install.sh
 cd ~
-rm -r ~/anki-2.1.51-linux-qt6
-rm ~/Downloads/anki-2.1.51-linux-qt6.tar.zst
+rm -r ~/anki-2.1.52-linux-qt6
+rm ~/Downloads/anki-2.1.52-linux-qt6.tar.zst
 
 #Install BlueJ (flatpak)
 flatpak -y install flathub org.bluej.BlueJ
