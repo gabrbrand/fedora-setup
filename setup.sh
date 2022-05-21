@@ -63,23 +63,6 @@ rm ~/anki-2.1.52-linux-qt6.tar.zst
 #Install BlueJ (flatpak)
 flatpak -y install flathub org.bluej.BlueJ
 
-#Git Configuration
-git config --global user.name "Gabriel Brand"
-git config --global user.email gabr.brand@gmail.com
-
-#Install GitHub CLI (rpm)
-sudo dnf install 'dnf-command(config-manager)'
-sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf -y install gh
-gh auth login
-
-#Set GitHub CLI aliases
-gh alias set rv 'repo view'
-gh alias set il 'issue list'
-gh alias set iv 'issue view'
-gh alias set pl 'pr list'
-gh alias set pv 'pr view'
-
 #Install Clapper (flatpak)
 flatpak -y install flathub com.github.rafostar.Clapper
 
@@ -100,6 +83,23 @@ flatpak -y install flathub com.lakoliu.Furtherance
 
 #Install Geary (rpm)
 sudo dnf -y install geary
+
+#Git Configuration
+git config --global user.name "Gabriel Brand"
+git config --global user.email gabr.brand@gmail.com
+
+#Install GitHub CLI (rpm)
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf -y install gh
+gh auth login
+
+#Set GitHub CLI aliases
+gh alias set rv 'repo view'
+gh alias set il 'issue list'
+gh alias set iv 'issue view'
+gh alias set pl 'pr list'
+gh alias set pv 'pr view'
 
 #Install GNU Image Manipulation Program (rpm)
 sudo dnf -y install gimp
