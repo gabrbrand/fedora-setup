@@ -8,14 +8,25 @@ defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf
 #Install Updates
 sudo dnf -y update
 
+#Enable the RPM Fusion repositories
+sudo dnf -y install \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf -y install \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  
+#Install plugins for playing movies and music
+sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
+sudo dnf -y install lame\* --exclude=lame-devel
+sudo dnf group upgrade --with-optional Multimedia
+
+#Add Flathub remote
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 #Remove Cheese (rpm)
 sudo dnf -y remove cheese
 
 #Remove Connections (rpm)
 sudo dnf -y remove gnome-connections
-
-#Remove Fedora Media Writer (rpm)
-sudo dnf -y remove mediawriter
 
 #Remove Maps (rpm)
 sudo dnf -y remove gnome-maps
@@ -32,33 +43,29 @@ sudo dnf -y remove gnome-tour
 #Remove Videos (rpm)
 sudo dnf -y remove totem
 
-#Remove unused system extensions
-cd /usr/share/gnome-shell/extensions
-sudo rm -r apps-menu@gnome-shell-extensions.gcampax.github.com background-logo@fedorahosted.org places-menu@gnome-shell-extensions.gcampax.github.com window-list@gnome-shell-extensions.gcampax.github.com
-cd ~
-
-#Add Flathub remote
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-#Git Configuration
-git config --global user.name "Gabriel Brand"
-git config --global user.email gabr.brand@gmail.com
+#Remove Background Logo and GNOME Classic
+sudo dnf -y remove gnome-shell-extension-background-logo
+sudo dnf -y remove gnome-classic-session
 
 #Install Amberol (flatpak)
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
-wget -P ~/Downloads https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
+wget https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
 cd ~
-tar xaf ~/Downloads/anki-2.1.52-linux-qt6.tar.zst
+tar xaf ~/anki-2.1.52-linux-qt6.tar.zst
 cd ~/anki-2.1.52-linux-qt6
 sudo ./install.sh
 cd ~
 rm -r ~/anki-2.1.52-linux-qt6
-rm ~/Downloads/anki-2.1.52-linux-qt6.tar.zst
+rm ~/anki-2.1.52-linux-qt6.tar.zst
 
 #Install BlueJ (flatpak)
 flatpak -y install flathub org.bluej.BlueJ
+
+#Git Configuration
+git config --global user.name "Gabriel Brand"
+git config --global user.email gabr.brand@gmail.com
 
 #Install GitHub CLI (rpm)
 sudo dnf install 'dnf-command(config-manager)'
@@ -201,24 +208,24 @@ dnf check-update
 sudo dnf -y install code
 
 #Install Printer and Scanner Drivers (MFC-9142CDN)
-mkdir ~/Downloads/linux-brprinter
-wget -P ~/Downloads/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
-cd ~/Downloads/linux-brprinter
+mkdir ~/linux-brprinter
+wget -P ~/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
+cd ~/linux-brprinter
 gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
 cd ~
-sudo rm -r ~/Downloads/linux-brprinter
+sudo rm -r ~/linux-brprinter
 
 #Install adw-gtk3
-sudo dnf -y install ninja-build meson sassc
-git clone https://github.com/lassekongo83/adw-gtk3.git
-cd ~/adw-gtk3
-meson build
-sudo ninja -C build install
+sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/releases/download/v1.9/adw-gtk3v1-9.tar.xz
+cd /usr/share/themes/
+sudo tar xaf adw-gtk3v1-9.tar.xz
 gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
-flatpak -y install org.gtk.Gtk3theme.adw-gtk3-dark
+sudo rm adw-gtk3v1-9.tar.xz
 cd ~
-sudo rm -r ~/adw-gtk3
+
+#Install Firefox GNOME theme
+curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
 
 #Install Papirus icon theme
 wget -qO- https://git.io/papirus-icon-theme-install | sh
