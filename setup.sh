@@ -13,7 +13,7 @@ sudo dnf -y install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-  
+
 #Install plugins for playing movies and music
 sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
 sudo dnf -y install lame\* --exclude=lame-devel
@@ -235,6 +235,12 @@ gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 wget -qO- https://git.io/papirus-folders-install | sh
 papirus-folders -C adwaita
 
+#Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+#Install bat
+cargo install --locked bat
+
 #Install bpytop (rpm)
 sudo dnf -y install bpytop
 
@@ -243,13 +249,16 @@ sudo dnf -y install cronie
 
 #Add crontab
 echo "
-55 21 * * * gabriel notify-send \"Ausschalten\" \"Das System schaltet sich automatisch in 5 Minuten ab.\"
+55 21 * * * gabriel notify-send \"Power Off\" \"The system will power off automatically in 5 minutes.\"
 
 00 22 * * * root /usr/sbin/shutdown -h now" | sudo tee -a /etc/crontab
 
 #Install lazygit (rpm)
 sudo dnf copr enable atim/lazygit -y
 sudo dnf -y install lazygit
+
+#Install lsd
+cargo install lsd
 
 #Install neofetch (rpm)
 sudo dnf -y install neofetch
@@ -282,15 +291,24 @@ sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' 
 
 #Add aliases
 echo "
-#git
-alias clone=\"git clone\"
-alias push=\"git push\"
-alias pull=\"git pull\"
-alias commit=\"git commit -m\"
 alias add=\"git add --all\"
+alias clone=\"git clone\"
+alias commit=\"git commit -m\"
+alias diff=\"git diff\"
+alias log=\"git log\"
+alias pull=\"git pull\"
+alias push=\"git push\"
+alias status=\"git status\"
 
 alias open=\"xdg-open\"
-alias shutdown=\"sudo shutdown -h now\"" >> ~/.zshrc
+
+alias cat=\"bat\"
+alias ls=\"lsd\"
+alias l=\"ls -l\"
+alias la=\"ls -a\"
+alias lla=\"ls -la\"
+alias lt=\"ls --tree\"
+" >> ~/.zshrc
 
 #Add dnf aliases
 sudo dnf alias add in=install
