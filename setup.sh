@@ -66,9 +66,6 @@ flatpak -y install flathub org.bluej.BlueJ
 #Install Clapper (flatpak)
 flatpak -y install flathub com.github.rafostar.Clapper
 
-#Install Dynamic Wallpaper (flatpak)
-flatpak -y install flathub me.dusansimic.DynamicWallpaper
-
 #Install Extension Manager (flatpak)
 flatpak -y install flathub com.mattjakeman.ExtensionManager
 
@@ -92,7 +89,7 @@ git config --global user.email gabr.brand@gmail.com
 sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf -y install gh
-gh auth login
+#gh auth login
 
 #Set GitHub CLI aliases
 gh alias set rv 'repo view'
@@ -304,9 +301,6 @@ alias open=\"xdg-open\"
 
 alias cat=\"bat\"
 alias ls=\"lsd\"
-alias l=\"ls -l\"
-alias la=\"ls -a\"
-alias lla=\"ls -la\"
 alias lt=\"ls --tree\"
 " >> ~/.zshrc
 
