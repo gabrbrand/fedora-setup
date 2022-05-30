@@ -138,65 +138,16 @@ cd ~/.config/ulauncher/user-themes
 git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
 cd ~
 
+#Download dotfiles
+cd ~/fedora-setup/
+git clone https://github.com/gabrbrand/dotfiles.git
+cd ~
+
 #Configure Ulauncher settings
-echo "{
-    \"blacklisted-desktop-dirs\": \"/usr/share/locale:/usr/share/app-install:/usr/share/kservices5:/usr/share/fk5:/usr/share/kservicetypes5:/usr/share/applications/screensavers:/usr/share/kde4:/usr/share/mimelnk\",
-    \"clear-previous-query\": true,
-    \"disable-desktop-filters\": false,
-    \"grab-mouse-pointer\": false,
-    \"hotkey-show-app\": \"null\",
-    \"render-on-screen\": \"default-monitor\",
-    \"show-indicator-icon\": true,
-    \"show-recent-apps\": \"0\",
-    \"terminal-command\": \"\",
-    \"theme-name\": \"adwaita-dark\"
-}" > ~/.config/ulauncher/settings.json
+cp ~/fedora-setup/dotfiles/ulauncher/settings.json ~/.config/ulauncher/settings.json
 
 #Add Ulauncher extensions
-echo "{
-    \"com.github.ulauncher.ulauncher-timer\": {
-        \"id\": \"com.github.ulauncher.ulauncher-timer\",
-        \"url\": \"https://github.com/Ulauncher/ulauncher-timer.git\",
-        \"updated_at\": \"2022-04-13T10:58:16.049611\",
-        \"last_commit\": \"4262fc24db08610d01ea311d2e12f22588c98886\",
-        \"last_commit_time\": \"2020-11-03T07:21:30\"
-    },
-    \"com.github.manahter.ulauncher-translate\": {
-        \"id\": \"com.github.manahter.ulauncher-translate\",
-        \"url\": \"https://github.com/manahter/ulauncher-translate.git\",
-        \"updated_at\": \"2022-04-13T10:58:34.262273\",
-        \"last_commit\": \"f81d32c583c7e3542bdba655e991a56e6d9a2c28\",
-        \"last_commit_time\": \"2021-04-09T18:12:40\"
-    },
-    \"com.github.ckrybus.ulauncher-journal\": {
-        \"id\": \"com.github.ckrybus.ulauncher-journal\",
-        \"url\": \"https://github.com/ckrybus/ulauncher-journal.git\",
-        \"updated_at\": \"2022-04-13T10:59:31.255868\",
-        \"last_commit\": \"c3fc03c6568bbba30ebef47a6f8d7321c3c9cdbb\",
-        \"last_commit_time\": \"2020-05-17T18:23:23\"
-    },
-    \"com.github.ulauncher.ulauncher-emoji\": {
-        \"id\": \"com.github.ulauncher.ulauncher-emoji\",
-        \"url\": \"https://github.com/Ulauncher/ulauncher-emoji\",
-        \"updated_at\": \"2022-04-13T18:51:26.718193\",
-        \"last_commit\": \"4c6af50d1c9a24d5aad2c597634ff0c634972a5c\",
-        \"last_commit_time\": \"2021-08-08T19:19:59\"
-    },
-    \"com.github.friday.ulauncher-clipboard\": {
-        \"id\": \"com.github.friday.ulauncher-clipboard\",
-        \"url\": \"https://github.com/friday/ulauncher-clipboard\",
-        \"updated_at\": \"2022-04-13T18:53:25.409074\",
-        \"last_commit\": \"9c8c0de1fd86504754300da8278fbc3db9b1a2b5\",
-        \"last_commit_time\": \"2022-01-18T05:32:06\"
-    },
-    \"com.github.iboyperson.ulauncher-system\": {
-        \"id\": \"com.github.iboyperson.ulauncher-system\",
-        \"url\": \"https://github.com/iboyperson/ulauncher-system\",
-        \"updated_at\": \"2022-04-13T18:59:06.905782\",
-        \"last_commit\": \"667613bf7bb6b4affa4f2121b58589477cd89829\",
-        \"last_commit_time\": \"2021-11-08T18:16:55\"
-    }
-}" > ~/.config/ulauncher/extensions.json
+cp ~/fedora-setup/dotfiles/ulauncher/extensions.json ~/.config/ulauncher/extensions.json
 
 #Install Visual Studio Code (rpm)
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -241,6 +192,9 @@ cargo install --locked bat
 #Install bpytop (rpm)
 sudo dnf -y install bpytop
 
+#Install cowsay
+sudo dnf -y install cowsay
+
 #Install cronie (rpm)
 sudo dnf -y install cronie
 
@@ -250,9 +204,15 @@ echo "
 
 00 22 * * * root /usr/sbin/shutdown -h now" | sudo tee -a /etc/crontab
 
+#Install fortune-mod
+sudo dnf -y install fortune-mod
+
 #Install lazygit (rpm)
 sudo dnf copr enable atim/lazygit -y
 sudo dnf -y install lazygit
+
+#Install lolcat
+sudo dnf -y install lolcat
 
 #Install lsd
 cargo install lsd
@@ -282,27 +242,11 @@ fc-cache -f -v
 #Install Powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+#Add .p10k.zsh
+cp ~/fedora-setup/dotfiles/.p10k.zsh ~/.p10k.zsh
+
 #Update .zshrc
-sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
-sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
-
-#Add aliases
-echo "
-alias add=\"git add --all\"
-alias clone=\"git clone\"
-alias commit=\"git commit -m\"
-alias diff=\"git diff\"
-alias log=\"git log\"
-alias pull=\"git pull\"
-alias push=\"git push\"
-alias status=\"git status\"
-
-alias open=\"xdg-open\"
-
-alias cat=\"bat\"
-alias ls=\"lsd\"
-alias lt=\"ls --tree\"
-" >> ~/.zshrc
+cp ~/fedora-setup/dotfiles/.zshrc ~/.zshrc
 
 #Add dnf aliases
 sudo dnf alias add in=install
@@ -335,3 +279,9 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Ulauncher'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'ulauncher-toggle'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Control>space'
+
+#Remove 'fedora-setup'-folder
+sudo rm -r ~/fedora-setup/
+
+#Remove unused folders
+rmdir ~/Desktop/ ~/Public/ ~/Templates/
