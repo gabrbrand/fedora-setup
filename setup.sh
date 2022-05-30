@@ -17,7 +17,7 @@ sudo dnf -y install \
 #Install plugins for playing movies and music
 sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
 sudo dnf -y install lame\* --exclude=lame-devel
-sudo dnf group upgrade --with-optional Multimedia
+sudo dnf -y group upgrade --with-optional Multimedia
 
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -25,39 +25,38 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 #Remove Background Logo
 sudo dnf -y remove gnome-shell-extension-background-logo
 
-#Remove Cheese (rpm)
+#Remove Cheese
 sudo dnf -y remove cheese
 
-#Remove Connections (rpm)
+#Remove Connections
 sudo dnf -y remove gnome-connections
 
 #Remove GNOME Classic
 sudo dnf -y remove gnome-classic-session
 
-#Remove Maps (rpm)
+#Remove Maps
 sudo dnf -y remove gnome-maps
 
-#Remove Photos (rpm)
+#Remove Photos
 sudo dnf -y remove gnome-photos
 
-#Remove Rhythmbox (rpm)
+#Remove Rhythmbox
 sudo dnf -y remove rhythmbox
 
-#Remove Tour (rpm)
+#Remove Tour
 sudo dnf -y remove gnome-tour
 
-#Remove Videos (rpm)
+#Remove Videos
 sudo dnf -y remove totem
 
 #Remove unused folders
 rmdir ~/Desktop/ ~/Public/ ~/Templates/
 
-#Install Amberol (flatpak)
+#Install Amberol
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
 wget https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
-cd ~
 tar xaf ~/anki-2.1.52-linux-qt6.tar.zst
 cd ~/anki-2.1.52-linux-qt6
 sudo ./install.sh
@@ -65,35 +64,36 @@ cd ~
 rm -r ~/anki-2.1.52-linux-qt6
 rm ~/anki-2.1.52-linux-qt6.tar.zst
 
-#Install BlueJ (flatpak)
+#Install BlueJ
 flatpak -y install flathub org.bluej.BlueJ
 
-#Install Clapper (flatpak)
+#Install Clapper
 flatpak -y install flathub com.github.rafostar.Clapper
 
-#Install Extension Manager (flatpak)
+#Install Extension Manager
 flatpak -y install flathub com.mattjakeman.ExtensionManager
 
-#Install Feeds (flatpak)
+#Install Feeds
 flatpak -y install flathub org.gabmus.gfeeds
 
-#Install Foliate (rpm)
+#Install Foliate
 sudo dnf -y install foliate
 
-#Install Furtherance (flatpak)
+#Install Furtherance
 flatpak -y install flathub com.lakoliu.Furtherance
 
-#Install Geary (rpm)
+#Install Geary
 sudo dnf -y install geary
 
 #Git Configuration
 git config --global user.name "Gabriel Brand"
 git config --global user.email gabr.brand@gmail.com
 
-#Install GitHub CLI (rpm)
+#Install GitHub CLI
 sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf -y install gh
+
 #gh auth login
 
 #Set GitHub CLI aliases
@@ -103,38 +103,39 @@ gh alias set iv 'issue view'
 gh alias set pl 'pr list'
 gh alias set pv 'pr view'
 
-#Install GNU Image Manipulation Program (rpm)
+#Install GNU Image Manipulation Program
 sudo dnf -y install gimp
 
-#Install KeePassXC (rpm)
+#Install KeePassXC
 sudo dnf -y install keepassxc
 
-#Install Marktext (flatpak)
+#Install Marktext
 flatpak -y install flathub com.github.marktext.marktext
 
-#Install Poedit (flatpak)
+#Install Poedit
 flatpak -y install flathub net.poedit.Poedit
 
-#Install Spotify (flatpak)
+#Install Spotify
 flatpak -y install flathub com.spotify.Client
 
-#Install Thunderbird (flatpak)
+#Install Thunderbird
 flatpak -y install flathub org.mozilla.Thunderbird
 
-#Install Tutanota (AppImage)
+#Install Tutanota
 mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 cd ~/.Applications
 chmod +x tutanota-desktop-linux.AppImage
 cd ~
 
-#Install Tweaks (rpm)
+#Install Tweaks
 sudo dnf -y install gnome-tweaks
+
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 
-#Install Ulauncher (rpm)
+#Install Ulauncher
 sudo dnf -y install ulauncher
 
 #Install Adwaita Dark Ulauncher
@@ -144,12 +145,12 @@ git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
 cd ~
 
 #Configure Ulauncher settings
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" >> ~/.config/ulauncher/settings.json
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" > ~/.config/ulauncher/settings.json
 
 #Add Ulauncher extensions
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json" >> ~/.config/ulauncher/extensions.json
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json" > ~/.config/ulauncher/extensions.json
 
-#Install Visual Studio Code (rpm)
+#Install Visual Studio Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 dnf check-update
@@ -189,13 +190,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 #Install bat
 cargo install --locked bat
 
-#Install bpytop (rpm)
+#Install bpytop
 sudo dnf -y install bpytop
 
 #Install cowsay
 sudo dnf -y install cowsay
 
-#Install cronie (rpm)
+#Install cronie
 sudo dnf -y install cronie
 
 #Add crontab
@@ -207,7 +208,7 @@ echo "
 #Install fortune-mod
 sudo dnf -y install fortune-mod
 
-#Install lazygit (rpm)
+#Install lazygit
 sudo dnf copr enable atim/lazygit -y
 sudo dnf -y install lazygit
 
@@ -217,19 +218,19 @@ sudo dnf -y install lolcat
 #Install lsd
 cargo install lsd
 
-#Install neofetch (rpm)
+#Install neofetch
 sudo dnf -y install neofetch
 
 #Update neofetch config
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf" >> ~/.config/neofetch/config.conf
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf" > ~/.config/neofetch/config.conf
 
-#Install zsh (rpm)
+#Install zsh
 sudo dnf -y install zsh
 sudo dnf -y install util-linux-user
 chsh -s $(which zsh)
 
 #Update .zshrc
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" >> ~/.zshrc
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
 
 #Install Oh My Zsh!
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -249,7 +250,7 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #Add .p10k.zsh
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh" >> ~/.p10k.zsh
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh" > ~/.p10k.zsh
 
 #Add dnf aliases
 sudo dnf alias add in=install
@@ -282,3 +283,6 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Ulauncher'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'ulauncher-toggle'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Control>space'
+
+#Reboot the machine
+reboot
