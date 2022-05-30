@@ -22,11 +22,17 @@ sudo dnf group upgrade --with-optional Multimedia
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+#Remove Background Logo
+sudo dnf -y remove gnome-shell-extension-background-logo
+
 #Remove Cheese (rpm)
 sudo dnf -y remove cheese
 
 #Remove Connections (rpm)
 sudo dnf -y remove gnome-connections
+
+#Remove GNOME Classic
+sudo dnf -y remove gnome-classic-session
 
 #Remove Maps (rpm)
 sudo dnf -y remove gnome-maps
@@ -43,9 +49,8 @@ sudo dnf -y remove gnome-tour
 #Remove Videos (rpm)
 sudo dnf -y remove totem
 
-#Remove Background Logo and GNOME Classic
-sudo dnf -y remove gnome-shell-extension-background-logo
-sudo dnf -y remove gnome-classic-session
+#Remove unused folders
+rmdir ~/Desktop/ ~/Public/ ~/Templates/
 
 #Install Amberol (flatpak)
 flatpak -y install flathub io.bassi.Amberol
@@ -138,16 +143,11 @@ cd ~/.config/ulauncher/user-themes
 git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
 cd ~
 
-#Download dotfiles
-cd ~/fedora-setup/
-git clone https://github.com/gabrbrand/dotfiles.git
-cd ~
-
 #Configure Ulauncher settings
-cp ~/fedora-setup/dotfiles/ulauncher/settings.json ~/.config/ulauncher/settings.json
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" >> ~/.config/ulauncher/settings.json
 
 #Add Ulauncher extensions
-cp ~/fedora-setup/dotfiles/ulauncher/extensions.json ~/.config/ulauncher/extensions.json
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json" >> ~/.config/ulauncher/extensions.json
 
 #Install Visual Studio Code (rpm)
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -220,10 +220,16 @@ cargo install lsd
 #Install neofetch (rpm)
 sudo dnf -y install neofetch
 
+#Update neofetch config
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf" >> ~/.config/neofetch/config.conf
+
 #Install zsh (rpm)
 sudo dnf -y install zsh
 sudo dnf -y install util-linux-user
 chsh -s $(which zsh)
+
+#Update .zshrc
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" >> ~/.zshrc
 
 #Install Oh My Zsh!
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -243,10 +249,7 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #Add .p10k.zsh
-cp ~/fedora-setup/dotfiles/.p10k.zsh ~/.p10k.zsh
-
-#Update .zshrc
-cp ~/fedora-setup/dotfiles/.zshrc ~/.zshrc
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh" >> ~/.p10k.zsh
 
 #Add dnf aliases
 sudo dnf alias add in=install
@@ -279,9 +282,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Ulauncher'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'ulauncher-toggle'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Control>space'
-
-#Remove 'fedora-setup'-folder
-sudo rm -r ~/fedora-setup/
-
-#Remove unused folders
-rmdir ~/Desktop/ ~/Public/ ~/Templates/
