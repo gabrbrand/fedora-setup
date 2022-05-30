@@ -3,7 +3,8 @@
 #Optimize DNF Config
 echo "fastestmirror=True
 max_parallel_downloads=10
-defaultyes=True" | sudo tee -a /etc/dnf/dnf.conf
+defaultyes=True
+keepcache=True" | sudo tee -a /etc/dnf/dnf.conf
 
 #Install Updates
 sudo dnf -y update
@@ -21,6 +22,9 @@ sudo dnf -y group upgrade --with-optional Multimedia
 
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+#Change Hostname
+sudo hostnamectl set-hostname "notebook-gabriel"
 
 #Remove Background Logo
 sudo dnf -y remove gnome-shell-extension-background-logo
@@ -169,9 +173,10 @@ sudo rm -r ~/linux-brprinter
 sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/releases/download/v1.9/adw-gtk3v1-9.tar.xz
 cd /usr/share/themes/
 sudo tar xaf adw-gtk3v1-9.tar.xz
-gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
 sudo rm adw-gtk3v1-9.tar.xz
 cd ~
+
+gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
 
 #Install Firefox GNOME theme
 curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
@@ -229,9 +234,6 @@ sudo dnf -y install zsh
 sudo dnf -y install util-linux-user
 chsh -s $(which zsh)
 
-#Update .zshrc
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
-
 #Install Oh My Zsh!
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -249,7 +251,10 @@ fc-cache -f -v
 #Install Powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-#Add .p10k.zsh
+#Update .zshrc
+curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
+
+#Create .p10k.zsh
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh" > ~/.p10k.zsh
 
 #Add dnf aliases
@@ -257,9 +262,6 @@ sudo dnf alias add in=install
 sudo dnf alias add rm=remove
 sudo dnf alias add if=info
 sudo dnf alias add se=search
-
-#Change Hostname
-sudo hostnamectl set-hostname "notebook-gabriel"
 
 #Set keyboard shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
@@ -285,4 +287,4 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Control>space'
 
 #Reboot the machine
-reboot
+#reboot
