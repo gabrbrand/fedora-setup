@@ -1,4 +1,19 @@
-#!/bin/bash
+#  _____        _                   ____       _
+# |  ___|__  __| | ___  _ __ __ _  / ___|  ___| |_ _   _ _ __
+# | |_ / _ \/ _` |/ _ \| '__/ _` | \___ \ / _ \ __| | | | '_ \
+# |  _|  __/ (_| | (_) | | | (_| |  ___) |  __/ |_| |_| | |_) |
+# |_|  \___|\__,_|\___/|_|  \__,_| |____/ \___|\__|\__,_| .__/
+#                                                       |_|
+# A setup script for Fedora (36)
+# https://github.com/gabrbrand/fedora-setup
+#
+#   ____ ____
+#  / ___| __ )    Gabriel Brand
+# | |  _|  _ \    https://github.com/gabrbrand
+# | |_| | |_) |
+#  \____|____/
+
+#!/usr/bin/bash
 
 #Optimize DNF Config
 echo "fastestmirror=True
