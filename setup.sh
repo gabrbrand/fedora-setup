@@ -142,8 +142,7 @@ flatpak -y install flathub org.mozilla.Thunderbird
 #Install Tutanota
 mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
-cd ~/.Applications
-chmod +x tutanota-desktop-linux.AppImage
+chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
 #Install Tweaks
 sudo dnf -y install gnome-tweaks
