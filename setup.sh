@@ -75,11 +75,10 @@ rmdir ~/Desktop/ ~/Public/ ~/Templates/
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
-wget https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
+wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
 tar xaf ~/anki-2.1.52-linux-qt6.tar.zst
 cd ~/anki-2.1.52-linux-qt6
 sudo ./install.sh
-cd ~
 rm -r ~/anki-2.1.52-linux-qt6
 rm ~/anki-2.1.52-linux-qt6.tar.zst
 
@@ -145,7 +144,6 @@ mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 cd ~/.Applications
 chmod +x tutanota-desktop-linux.AppImage
-cd ~
 
 #Install Tweaks
 sudo dnf -y install gnome-tweaks
@@ -161,7 +159,6 @@ sudo dnf -y install ulauncher
 mkdir -p ~/.config/ulauncher/user-themes
 cd ~/.config/ulauncher/user-themes
 git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
-cd ~
 
 #Configure Ulauncher settings
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" > ~/.config/ulauncher/settings.json
@@ -181,7 +178,6 @@ wget -P ~/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-b
 cd ~/linux-brprinter
 gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
-cd ~
 sudo rm -r ~/linux-brprinter
 
 #Install adw-gtk3
@@ -189,7 +185,6 @@ sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/release
 cd /usr/share/themes/
 sudo tar xaf adw-gtk3v1-9.tar.xz
 sudo rm adw-gtk3v1-9.tar.xz
-cd ~
 
 gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
 
