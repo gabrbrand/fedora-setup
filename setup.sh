@@ -156,9 +156,8 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 sudo dnf -y install ulauncher
 
 #Install Adwaita Dark Ulauncher
-mkdir -p ~/.config/ulauncher/user-themes
-cd ~/.config/ulauncher/user-themes
-git clone https://github.com/gabrbrand/adwaita-dark-ulauncher.git
+mkdir -p ~/.config/ulauncher/user-themes ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
+git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
 
 #Configure Ulauncher settings
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" > ~/.config/ulauncher/settings.json
@@ -178,7 +177,7 @@ wget -P ~/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-b
 cd ~/linux-brprinter
 gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
-sudo rm -r ~/linux-brprinter
+rm -rf ~/linux-brprinter
 
 #Install adw-gtk3
 sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/releases/download/v1.9/adw-gtk3v1-9.tar.xz
@@ -225,9 +224,6 @@ sudo dnf -y install fortune-mod
 #Install lazygit
 sudo dnf copr enable atim/lazygit -y
 sudo dnf -y install lazygit
-
-#Install lolcat
-sudo dnf -y install lolcat
 
 #Install lsd
 cargo install lsd
