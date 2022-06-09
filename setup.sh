@@ -71,16 +71,19 @@ sudo dnf -y remove totem
 #Remove unused folders
 rmdir ~/Desktop/ ~/Public/ ~/Templates/
 
+#Install Alacritty
+sudo dnf -y install alacritty
+
 #Install Amberol
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
-wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.52/anki-2.1.52-linux-qt6.tar.zst
-tar xaf ~/anki-2.1.52-linux-qt6.tar.zst
-cd ~/anki-2.1.52-linux-qt6
+wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.53/anki-2.1.53-linux-qt6.tar.zst
+tar xaf ~/anki-2.1.53-linux-qt6.tar.zst
+cd ~/anki-2.1.53-linux-qt6
 sudo ./install.sh
-rm -r ~/anki-2.1.52-linux-qt6
-rm ~/anki-2.1.52-linux-qt6.tar.zst
+rm -r ~/anki-2.1.53-linux-qt6
+rm ~/anki-2.1.53-linux-qt6.tar.zst
 
 #Install BlueJ
 flatpak -y install flathub org.bluej.BlueJ
@@ -111,7 +114,6 @@ git config --global user.email gabr.brand@gmail.com
 sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf -y install gh
-
 #gh auth login
 
 #Set GitHub CLI aliases
@@ -146,7 +148,6 @@ chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
 #Install Tweaks
 sudo dnf -y install gnome-tweaks
-
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -184,7 +185,6 @@ sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/release
 cd /usr/share/themes/
 sudo tar xaf adw-gtk3v1-9.tar.xz
 sudo rm adw-gtk3v1-9.tar.xz
-
 gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
 
 #Install Firefox GNOME theme
@@ -238,6 +238,9 @@ sudo dnf -y install neofetch
 #Update neofetch config
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf" > ~/.config/neofetch/config.conf
 
+#Install vim
+sudo dnf -y install vim
+
 #Install zsh
 sudo dnf -y install zsh
 sudo dnf -y install util-linux-user
@@ -275,7 +278,7 @@ sudo dnf alias add se=search
 #Set keyboard shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Dateien'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Files'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'nautilus'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>D'
 
