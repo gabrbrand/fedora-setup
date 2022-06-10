@@ -3,5 +3,7 @@
 My personal setup script for Fedora
 
 ```bash
-curl "https://raw.githubusercontent.com/gabrbrand/fedora-setup/main/setup.sh" | bash
+wget https://raw.githubusercontent.com/gabrbrand/fedora-setup/main/gnome-setup.sh
+chmod +x gnome-setup.sh
+./gnome-setup.sh
 ```

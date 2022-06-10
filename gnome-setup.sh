@@ -71,9 +71,6 @@ sudo dnf -y remove totem
 #Remove unused folders
 rmdir ~/Desktop/ ~/Public/ ~/Templates/
 
-#Install Alacritty
-sudo dnf -y install alacritty
-
 #Install Amberol
 flatpak -y install flathub io.bassi.Amberol
 
@@ -156,8 +153,9 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 sudo dnf -y install ulauncher
 
 #Install Adwaita Dark Ulauncher
-mkdir -p ~/.config/ulauncher/user-themes ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
-git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
+mkdir -p ~/.config/ulauncher/user-themes
+cd ~/.config/ulauncher/user-themes
+git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git
 
 #Configure Ulauncher settings
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" > ~/.config/ulauncher/settings.json
@@ -263,7 +261,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
 
 #Create .p10k.zsh
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh" > ~/.p10k.zsh
+wget -P ~ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh"
 
 #Add dnf aliases
 sudo dnf alias add in=install
