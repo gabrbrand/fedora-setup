@@ -38,6 +38,9 @@ sudo dnf -y group upgrade --with-optional Multimedia
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+#Enable Flathub remote
+flatpak remote-modify --enable flathub
+
 #Change Hostname
 sudo hostnamectl set-hostname "notebook-gabriel"
 

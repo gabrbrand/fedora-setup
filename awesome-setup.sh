@@ -41,6 +41,9 @@ sudo dnf -y install flatpak
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+#Enable Flathub remote
+flatpak remote-modify --enable flathub
+
 #Change Hostname
 sudo hostnamectl set-hostname "notebook-gabriel"
 
@@ -85,6 +88,9 @@ flatpak -y install flathub com.lakoliu.Furtherance
 
 #Install Geary
 sudo dnf -y install geary
+
+#Install git
+sudo dnf -y install git
 
 #Git Configuration
 git config --global user.name "Gabriel Brand"
@@ -134,6 +140,9 @@ flatpak -y install flathub net.poedit.Poedit
 #Install rofi
 sudo dnf -y install rofi
 
+#Install scrot
+sudo dnf -y install scrot
+
 #Install Spotify
 flatpak -y install flathub com.spotify.Client
 
@@ -153,6 +162,9 @@ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 dnf check-update
 sudo dnf -y install code
+
+#Install volumeicon
+sudo dnf -y install volumeicon
 
 #Install Printer and Scanner Drivers (MFC-9142CDN)
 mkdir ~/linux-brprinter
