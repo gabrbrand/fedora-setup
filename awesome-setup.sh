@@ -68,6 +68,12 @@ rm ~/anki-2.1.53-linux-qt6.tar.zst
 #Install awesome
 sudo dnf -y install awesome
 
+#Create rc.lua
+mkdir ~/.config/awesome/
+wget -P ~/.config/awesome/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/awesome/rc.lua
+wget -P ~/.config/awesome/ https://raw.githubusercontent.com/rxi/json.lua/master/json.lua
+git clone https://github.com/streetturtle/awesome-wm-widgets.git ~/.config/awesome/
+
 #Install BlueJ
 flatpak -y install flathub org.bluej.BlueJ
 
@@ -139,6 +145,11 @@ flatpak -y install flathub net.poedit.Poedit
 
 #Install rofi
 sudo dnf -y install rofi
+
+#Create config.rasi
+mkdir ~/.config/rofi/ ~/.config/rofi/themes
+wget -P ~/.config/rofi/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/rofi/config.rasi
+wget -P ~/.config/rofi/themes https://raw.githubusercontent.com/lr-tech/rofi-themes-collection/master/themes/squared-everforest.rasi
 
 #Install scrot
 sudo dnf -y install scrot
@@ -226,8 +237,9 @@ cargo install lsd
 #Install neofetch
 sudo dnf -y install neofetch
 
-#Update neofetch config
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf" > ~/.config/neofetch/config.conf
+#Create config.conf
+mkdir ~/.config/neofetch/
+wget -P ~/.config/neofetch/ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf"
 
 #Install vim
 sudo dnf -y install vim
@@ -258,7 +270,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
 
 #Create .p10k.zsh
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh" > ~/.p10k.zsh
+wget -P ~ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh"
 
 #Add dnf aliases
 sudo dnf alias add in=install

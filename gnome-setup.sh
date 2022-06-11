@@ -232,8 +232,9 @@ cargo install lsd
 #Install neofetch
 sudo dnf -y install neofetch
 
-#Update neofetch config
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf" > ~/.config/neofetch/config.conf
+#Create config.conf
+mkdir ~/.config/neofetch/
+wget -P ~/.config/neofetch/ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf"
 
 #Install vim
 sudo dnf -y install vim
