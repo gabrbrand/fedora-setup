@@ -72,7 +72,11 @@ sudo dnf -y install awesome
 mkdir -p ~/.config/awesome/
 wget -P ~/.config/awesome/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/awesome/rc.lua
 wget -P ~/.config/awesome/ https://raw.githubusercontent.com/rxi/json.lua/master/json.lua
-git clone https://github.com/streetturtle/awesome-wm-widgets.git ~/.config/awesome/
+sudo wget -P /usr/local/bin/ https://gist.githubusercontent.com/streetturtle/fa6258f3ff7b17747ee3/raw/e52c3ed7086461a4e218e3121949e4515c5ccc78/sp
+sudo chmod +x /usr/local/bin/sp
+git clone https://github.com/gabrbrand/dotfiles.git ~/dotfiles
+cp -r ~/dotfiles/awesome/awesome-wm-widgets ~/.config/awesome
+rm -rf ~/dofiles
 
 #Install BlueJ
 flatpak -y install flathub org.bluej.BlueJ
