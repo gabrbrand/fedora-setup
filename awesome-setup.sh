@@ -51,7 +51,7 @@ sudo hostnamectl set-hostname "notebook-gabriel"
 sudo dnf -y install alacritty
 
 #Create alacritty.yml
-mkdir ~/.config/alacritty/
+mkdir -p ~/.config/alacritty/
 wget -P ~/.config/alacritty/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/alacritty/alacritty.yml
 
 #Install Amberol
@@ -69,7 +69,7 @@ rm ~/anki-2.1.53-linux-qt6.tar.zst
 sudo dnf -y install awesome
 
 #Create rc.lua
-mkdir ~/.config/awesome/
+mkdir -p ~/.config/awesome/
 wget -P ~/.config/awesome/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/awesome/rc.lua
 wget -P ~/.config/awesome/ https://raw.githubusercontent.com/rxi/json.lua/master/json.lua
 git clone https://github.com/streetturtle/awesome-wm-widgets.git ~/.config/awesome/
@@ -84,7 +84,7 @@ flatpak -y install flathub com.github.rafostar.Clapper
 flatpak -y install flathub org.gabmus.gfeeds
 
 #Install Firefox
-sudo dnf -y firefox
+sudo dnf -y install firefox
 
 #Install Foliate
 sudo dnf -y install foliate
@@ -147,7 +147,7 @@ flatpak -y install flathub net.poedit.Poedit
 sudo dnf -y install rofi
 
 #Create config.rasi
-mkdir ~/.config/rofi/ ~/.config/rofi/themes
+mkdir -p ~/.config/rofi/themes
 wget -P ~/.config/rofi/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/rofi/config.rasi
 wget -P ~/.config/rofi/themes https://raw.githubusercontent.com/lr-tech/rofi-themes-collection/master/themes/squared-everforest.rasi
 
@@ -238,7 +238,7 @@ cargo install lsd
 sudo dnf -y install neofetch
 
 #Create config.conf
-mkdir ~/.config/neofetch/
+mkdir -p ~/.config/neofetch/
 wget -P ~/.config/neofetch/ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf"
 
 #Install vim

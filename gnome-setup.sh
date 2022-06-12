@@ -82,7 +82,7 @@ wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.53/anki-2.1.53
 tar xaf ~/anki-2.1.53-linux-qt6.tar.zst
 cd ~/anki-2.1.53-linux-qt6
 sudo ./install.sh
-rm -r ~/anki-2.1.53-linux-qt6
+rm -rf ~/anki-2.1.53-linux-qt6
 rm ~/anki-2.1.53-linux-qt6.tar.zst
 
 #Install BlueJ
@@ -156,9 +156,8 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 sudo dnf -y install ulauncher
 
 #Install Adwaita Dark Ulauncher
-mkdir -p ~/.config/ulauncher/user-themes
-cd ~/.config/ulauncher/user-themes
-git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git
+mkdir -p ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
+git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
 
 #Configure Ulauncher settings
 curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" > ~/.config/ulauncher/settings.json
@@ -233,7 +232,7 @@ cargo install lsd
 sudo dnf -y install neofetch
 
 #Create config.conf
-mkdir ~/.config/neofetch/
+mkdir -p ~/.config/neofetch/
 wget -P ~/.config/neofetch/ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf"
 
 #Install vim
