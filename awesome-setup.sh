@@ -57,16 +57,25 @@ wget -P ~/.config/alacritty/ https://raw.githubusercontent.com/gabrbrand/dotfile
 #Install Amberol
 flatpak -y install flathub io.bassi.Amberol
 
+#Install zstd
+sudo dnf -y install zstd
+
 #Install Anki
 wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.53/anki-2.1.53-linux-qt6.tar.zst
 tar xaf ~/anki-2.1.53-linux-qt6.tar.zst
 cd ~/anki-2.1.53-linux-qt6
 sudo ./install.sh
-rm -r ~/anki-2.1.53-linux-qt6
+rm -rf ~/anki-2.1.53-linux-qt6
 rm ~/anki-2.1.53-linux-qt6.tar.zst
+
+#Install ARandR
+sudo dnf -y install arandr
 
 #Install awesome
 sudo dnf -y install awesome
+
+#Install git
+sudo dnf -y install git
 
 #Create rc.lua
 mkdir -p ~/.config/awesome/
@@ -99,9 +108,6 @@ flatpak -y install flathub com.lakoliu.Furtherance
 #Install Geary
 sudo dnf -y install geary
 
-#Install git
-sudo dnf -y install git
-
 #Git Configuration
 git config --global user.name "Gabriel Brand"
 git config --global user.email gabr.brand@gmail.com
@@ -122,27 +128,27 @@ gh alias set pv 'pr view'
 #Install GNU Image Manipulation Program
 sudo dnf -y install gimp
 
+#Install gThumb
+sudo dnf -y install gthumb
+
+#Install i3lock
+sudo dnf -y install i3lock
+
 #Install KeePassXC
 sudo dnf -y install keepassxc
 
-#Install lightdm
-sudo dnf -y install lightdm
-
-#Enable lightdm
-sudo systemctl enable lightdm
-
-#Set graphical target
-sudo systemctl set-default graphical.target
-
-#Install lightdm-webkit2-greeter
-sudo dnf -y copr enable antergos/lightdm-webkit2-greeter
-sudo dnf -y install lightdm-webkit2-greeter
+#Install lxappearance
+sudo dnf -y install lxappearance
 
 #Install Marktext
 flatpak -y install flathub com.github.marktext.marktext
 
 #Install nitrogen
 sudo dnf -y install nitrogen
+
+#Set wallpaper
+wget -P ~ https://github.com/gabrbrand/dotfiles/raw/main/.bg.png
+nitrogen --set-tiled --save ~/.bg.png
 
 #Install Poedit
 flatpak -y install flathub net.poedit.Poedit
@@ -157,6 +163,21 @@ wget -P ~/.config/rofi/themes https://raw.githubusercontent.com/lr-tech/rofi-the
 
 #Install scrot
 sudo dnf -y install scrot
+
+#Install sddm
+sudo dnf -y install sddm
+
+#Enable sddm
+sudo systemctl enable sddm
+
+#Set graphical target
+sudo systemctl set-default graphical.target
+
+#Install Materia-KDE SDDM theme
+sudo dnf -y install materia-kde-sddm
+
+#Create sddm.conf
+curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/sddm.conf | sudo tee /etc/sddm.conf
 
 #Install Spotify
 flatpak -y install flathub com.spotify.Client
@@ -189,19 +210,11 @@ gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
 rm -rf ~/linux-brprinter
 
-#Install adw-gtk3
-sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/releases/download/v1.9/adw-gtk3v1-9.tar.xz
-cd /usr/share/themes/
-sudo tar xaf adw-gtk3v1-9.tar.xz
-sudo rm adw-gtk3v1-9.tar.xz
-gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
-
 #Install Firefox GNOME theme
 curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
 
 #Install Papirus icon theme
 wget -qO- https://git.io/papirus-icon-theme-install | sh
-gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 
 #Install Papirus Folders
 wget -qO- https://git.io/papirus-folders-install | sh
@@ -209,6 +222,9 @@ papirus-folders -C adwaita
 
 #Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+#Configure current shell
+source $HOME/.cargo/env
 
 #Install bat
 cargo install --locked bat
@@ -243,14 +259,10 @@ sudo dnf -y install neofetch
 
 #Create config.conf
 mkdir -p ~/.config/neofetch/
-wget -P ~/.config/neofetch/ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf"
-
-#Install vim
-sudo dnf -y install vim
+wget -P ~/.config/neofetch/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf
 
 #Install zsh
 sudo dnf -y install zsh
-sudo dnf -y install util-linux-user
 chsh -s $(which zsh)
 
 #Install Oh My Zsh!
@@ -271,10 +283,10 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #Update .zshrc
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
+curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc > ~/.zshrc
 
 #Create .p10k.zsh
-wget -P ~ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh"
+wget -P ~ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh
 
 #Add dnf aliases
 sudo dnf alias add in=install

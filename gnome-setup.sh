@@ -160,10 +160,10 @@ mkdir -p ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
 git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
 
 #Configure Ulauncher settings
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json" > ~/.config/ulauncher/settings.json
+curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json > ~/.config/ulauncher/settings.json
 
 #Add Ulauncher extensions
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json" > ~/.config/ulauncher/extensions.json
+curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json > ~/.config/ulauncher/extensions.json
 
 #Install Visual Studio Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -200,6 +200,9 @@ papirus-folders -C adwaita
 #Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+#Configure current shell
+source $HOME/.cargo/env
+
 #Install bat
 cargo install --locked bat
 
@@ -233,7 +236,7 @@ sudo dnf -y install neofetch
 
 #Create config.conf
 mkdir -p ~/.config/neofetch/
-wget -P ~/.config/neofetch/ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf"
+wget -P ~/.config/neofetch/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf
 
 #Install vim
 sudo dnf -y install vim
@@ -261,10 +264,10 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #Update .zshrc
-curl "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc" > ~/.zshrc
+curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc > ~/.zshrc
 
 #Create .p10k.zsh
-wget -P ~ "https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh"
+wget -P ~ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh
 
 #Add dnf aliases
 sudo dnf alias add in=install
