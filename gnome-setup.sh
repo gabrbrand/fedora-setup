@@ -197,6 +197,13 @@ gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
 wget -qO- https://git.io/papirus-folders-install | sh
 papirus-folders -C adwaita
 
+#Set Plymouth Theme
+git clone https://github.com/adi1090x/plymouth-themes.git
+sudo dnf -y install plymouth-plugin-script
+sudo cp -r ~/plymouth-themes/pack_3/polaroid /usr/share/plymouth/themes/
+sudo plymouth-set-default-theme -R polaroid
+rm -rf ~/plymouth-themes
+
 #Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 

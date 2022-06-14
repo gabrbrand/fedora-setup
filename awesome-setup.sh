@@ -85,7 +85,7 @@ sudo wget -P /usr/local/bin/ https://gist.githubusercontent.com/streetturtle/fa6
 sudo chmod +x /usr/local/bin/sp
 git clone https://github.com/gabrbrand/dotfiles.git ~/dotfiles
 cp -r ~/dotfiles/awesome/awesome-wm-widgets ~/.config/awesome
-rm -rf ~/dofiles
+rm -rf ~/dotfiles
 
 #Install BlueJ
 flatpak -y install flathub org.bluej.BlueJ
@@ -146,9 +146,8 @@ flatpak -y install flathub com.github.marktext.marktext
 #Install nitrogen
 sudo dnf -y install nitrogen
 
-#Set wallpaper
+#Download background
 wget -P ~ https://github.com/gabrbrand/dotfiles/raw/main/.bg.png
-nitrogen --set-tiled --save ~/.bg.png
 
 #Install Poedit
 flatpak -y install flathub net.poedit.Poedit
@@ -176,6 +175,9 @@ sudo systemctl set-default graphical.target
 #Install Materia-KDE SDDM theme
 sudo dnf -y install materia-kde-sddm
 
+#Install QtQuick controls
+sudo dnf -y install qt5-qtquickcontrols2
+
 #Create sddm.conf
 curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/sddm.conf | sudo tee /etc/sddm.conf
 
@@ -202,6 +204,9 @@ sudo dnf -y install code
 #Install volumeicon
 sudo dnf -y install volumeicon
 
+#Install CUPS
+sudo dnf -y install cups
+
 #Install Printer and Scanner Drivers (MFC-9142CDN)
 mkdir ~/linux-brprinter
 wget -P ~/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
@@ -218,7 +223,14 @@ wget -qO- https://git.io/papirus-icon-theme-install | sh
 
 #Install Papirus Folders
 wget -qO- https://git.io/papirus-folders-install | sh
-papirus-folders -C adwaita
+#papirus-folders -C adwaita
+
+#Set Plymouth Theme
+git clone https://github.com/adi1090x/plymouth-themes.git
+sudo dnf -y install plymouth-plugin-script
+sudo cp -r ~/plymouth-themes/pack_3/polaroid /usr/share/plymouth/themes/
+sudo plymouth-set-default-theme -R polaroid
+rm -rf ~/plymouth-themes
 
 #Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
