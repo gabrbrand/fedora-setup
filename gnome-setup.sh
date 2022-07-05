@@ -13,7 +13,7 @@
 # | |_| | |_) |
 #  \____|____/
 
-#!/usr/bin/bash
+#!/bin/bash
 
 #Optimize DNF Config
 echo "fastestmirror=True
@@ -65,6 +65,9 @@ sudo dnf -y remove gnome-photos
 #Remove Rhythmbox
 sudo dnf -y remove rhythmbox
 
+#Remove Terminal
+sudo dnf -y remove gnome-terminal
+
 #Remove Tour
 sudo dnf -y remove gnome-tour
 
@@ -78,12 +81,16 @@ rmdir ~/Desktop/ ~/Public/ ~/Templates/
 flatpak -y install flathub io.bassi.Amberol
 
 #Install Anki
-wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.53/anki-2.1.53-linux-qt6.tar.zst
-tar xaf ~/anki-2.1.53-linux-qt6.tar.zst
-cd ~/anki-2.1.53-linux-qt6
+version=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+wget -P ~ https://github.com/ankitects/anki/releases/download/$version/anki-$version-linux-qt6.tar.zst
+tar xaf ~/anki-$version-linux-qt6.tar.zst
+cd ~/anki-$version-linux-qt6
 sudo ./install.sh
-rm -rf ~/anki-2.1.53-linux-qt6
-rm ~/anki-2.1.53-linux-qt6.tar.zst
+rm -rf ~/anki-$version-linux-qt6
+rm ~/anki-$version-linux-qt6.tar.zst
+
+#Install BlackBox
+flatpak install flathub com.raggesilver.BlackBox
 
 #Install BlueJ
 flatpak -y install flathub org.bluej.BlueJ
@@ -285,7 +292,7 @@ sudo dnf alias add se=search
 #Set keyboard shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Files'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Dateien'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'nautilus'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>D'
 
@@ -294,7 +301,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Super>F'
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'Terminal'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'gnome-terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'flatpak run com.raggesilver.BlackBox'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Control><Alt>T'
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'Thunderbird'
@@ -304,6 +311,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Ulauncher'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'ulauncher-toggle'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Control>space'
-
-#Reboot the machine
-#reboot

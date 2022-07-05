@@ -13,7 +13,7 @@
 # | |_| | |_) |
 #  \____|____/
 
-#!/usr/bin/bash
+#!/bin/bash
 
 #Optimize DNF Config
 echo "fastestmirror=True
@@ -57,16 +57,20 @@ wget -P ~/.config/alacritty/ https://raw.githubusercontent.com/gabrbrand/dotfile
 #Install Amberol
 flatpak -y install flathub io.bassi.Amberol
 
+#Install amixer
+sudo dnf -y install amixer
+
 #Install zstd
 sudo dnf -y install zstd
 
 #Install Anki
-wget -P ~ https://github.com/ankitects/anki/releases/download/2.1.53/anki-2.1.53-linux-qt6.tar.zst
-tar xaf ~/anki-2.1.53-linux-qt6.tar.zst
-cd ~/anki-2.1.53-linux-qt6
+version=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+wget -P ~ https://github.com/ankitects/anki/releases/download/$version/anki-$version-linux-qt6.tar.zst
+tar xaf ~/anki-$version-linux-qt6.tar.zst
+cd ~/anki-$version-linux-qt6
 sudo ./install.sh
-rm -rf ~/anki-2.1.53-linux-qt6
-rm ~/anki-2.1.53-linux-qt6.tar.zst
+rm -rf ~/anki-$version-linux-qt6
+rm ~/anki-$version-linux-qt6.tar.zst
 
 #Install ARandR
 sudo dnf -y install arandr
@@ -137,6 +141,9 @@ sudo dnf -y install i3lock
 #Install KeePassXC
 sudo dnf -y install keepassxc
 
+#Install light
+sudo dnf -y install light
+
 #Install lxappearance
 sudo dnf -y install lxappearance
 
@@ -201,9 +208,6 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 dnf check-update
 sudo dnf -y install code
 
-#Install volumeicon
-sudo dnf -y install volumeicon
-
 #Install CUPS
 sudo dnf -y install cups
 
@@ -218,12 +222,15 @@ rm -rf ~/linux-brprinter
 #Install Firefox GNOME theme
 curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
 
+#Install Materia GTK Theme
+sudo dnf -y install materia-gtk-theme
+
 #Install Papirus icon theme
 wget -qO- https://git.io/papirus-icon-theme-install | sh
 
 #Install Papirus Folders
 wget -qO- https://git.io/papirus-folders-install | sh
-#papirus-folders -C adwaita
+papirus-folders -C adwaita
 
 #Set Plymouth Theme
 git clone https://github.com/adi1090x/plymouth-themes.git
@@ -305,6 +312,3 @@ sudo dnf alias add in=install
 sudo dnf alias add rm=remove
 sudo dnf alias add if=info
 sudo dnf alias add se=search
-
-#Reboot the machine
-#reboot
