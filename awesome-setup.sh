@@ -239,14 +239,8 @@ sudo cp -r ~/plymouth-themes/pack_3/polaroid /usr/share/plymouth/themes/
 sudo plymouth-set-default-theme -R polaroid
 rm -rf ~/plymouth-themes
 
-#Install Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-#Configure current shell
-source $HOME/.cargo/env
-
 #Install bat
-cargo install --locked bat
+sudo dnf -y install bat
 
 #Install bpytop
 sudo dnf -y install bpytop
@@ -263,6 +257,9 @@ echo "
 
 00 22 * * * root /usr/sbin/shutdown -h now" | sudo tee -a /etc/crontab
 
+#Install duf
+sudo dnf -y install duf
+
 #Install fortune-mod
 sudo dnf -y install fortune-mod
 
@@ -271,7 +268,7 @@ sudo dnf -y copr enable atim/lazygit
 sudo dnf -y install lazygit
 
 #Install lsd
-cargo install lsd
+sudo dnf -y install lsd
 
 #Install neofetch
 sudo dnf -y install neofetch

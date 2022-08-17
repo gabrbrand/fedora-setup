@@ -35,50 +35,41 @@ sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-o
 sudo dnf -y install lame\* --exclude=lame-devel
 sudo dnf -y group upgrade --with-optional Multimedia
 
+#Change Hostname
+sudo hostnamectl set-hostname "notebook-gabriel"
+
+#Remove unused applications (Cheese, Connections, Maps, Photos, Rhythmbox, Tour, Videos)
+sudo dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour rhythmbox totem
+
+#Remove unused GNOME Shell Extensions (Background Logo, GNOME Classic)
+sudo dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
+
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Enable Flathub remote
 flatpak remote-modify --enable flathub
 
-#Change Hostname
-sudo hostnamectl set-hostname "notebook-gabriel"
+#Install flatpak applications (adw-gtk3, adw-gtk3-dark, Amberol, BlueJ, Clapper, Dialect, Dynamic Wallpaper, Extension Manager, Feeds, Furtherance, Login Manager Settings, Marktext, Poedit, Spotify, Thunderbird, Video Downloader)
+flatpak -y install flathub app.drey.Dialect com.github.marktext.marktext com.github.rafostar.Clapper com.github.unrud.VideoDownloader com.lakoliu.Furtherance com.mattjakeman.ExtensionManager com.spotify.Client io.bassi.Amberol io.github.realmazharhussain.GdmSettings me.dusansimic.DynamicWallpaper net.poedit.Poedit org.bluej.BlueJ org.gabmus.gfeeds org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark org.mozilla.Thunderbird
 
-#Remove Background Logo
-sudo dnf -y remove gnome-shell-extension-background-logo
+#Enable adw-gtk3 copr repo
+sudo dnf -y copr enable nickavem/adw-gtk3
 
-#Remove Cheese
-sudo dnf -y remove cheese
+#Add GitHub CLI repo
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 
-#Remove Connections
-sudo dnf -y remove gnome-connections
+#Enable lazygit copr repo
+sudo dnf -y copr enable atim/lazygit
 
-#Remove GNOME Classic
-sudo dnf -y remove gnome-classic-session
+#Add Visual Studio Code repo
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+dnf check-update
 
-#Remove Maps
-sudo dnf -y remove gnome-maps
-
-#Remove Photos
-sudo dnf -y remove gnome-photos
-
-#Remove Rhythmbox
-sudo dnf -y remove rhythmbox
-
-#Remove Terminal
-sudo dnf -y remove gnome-terminal
-
-#Remove Tour
-sudo dnf -y remove gnome-tour
-
-#Remove Videos
-sudo dnf -y remove totem
-
-#Remove unused folders
-rmdir ~/Desktop/ ~/Public/ ~/Templates/
-
-#Install Amberol
-flatpak -y install flathub io.bassi.Amberol
+#Install rpm applications (adw-gtk3, bat, bpytop, cowsay, cronie, duf, Foliate, fortune-mod, GIMP, GitHub CLI, KeePassXC, lazygit, lsd, neofetch, plymouth-plugin-script, Tweaks, Ulauncher, util-linux-user, vim, Visual Studio Code, zsh)
+sudo dnf -y install adw-gtk3 bat bpytop code cowsay cronie duf foliate fortune-mod gh gimp gnome-tweaks keepassxc lazygit lsd neofetch plymouth-plugin-script ulauncher util-linux-user vim zsh
 
 #Install Anki
 version=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
@@ -89,39 +80,9 @@ sudo ./install.sh
 rm -rf ~/anki-$version-linux-qt6
 rm ~/anki-$version-linux-qt6.tar.zst
 
-#Install BlackBox
-flatpak install flathub com.raggesilver.BlackBox
-
-#Install BlueJ
-flatpak -y install flathub org.bluej.BlueJ
-
-#Install Clapper
-flatpak -y install flathub com.github.rafostar.Clapper
-
-#Install Extension Manager
-flatpak -y install flathub com.mattjakeman.ExtensionManager
-
-#Install Feeds
-flatpak -y install flathub org.gabmus.gfeeds
-
-#Install Foliate
-sudo dnf -y install foliate
-
-#Install Furtherance
-flatpak -y install flathub com.lakoliu.Furtherance
-
-#Install Geary
-sudo dnf -y install geary
-
 #Git Configuration
 git config --global user.name "Gabriel Brand"
 git config --global user.email gabr.brand@gmail.com
-
-#Install GitHub CLI
-sudo dnf install 'dnf-command(config-manager)'
-sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf -y install gh
-#gh auth login
 
 #Set GitHub CLI aliases
 gh alias set rv 'repo view'
@@ -130,53 +91,25 @@ gh alias set iv 'issue view'
 gh alias set pl 'pr list'
 gh alias set pv 'pr view'
 
-#Install GNU Image Manipulation Program
-sudo dnf -y install gimp
-
-#Install KeePassXC
-sudo dnf -y install keepassxc
-
-#Install Marktext
-flatpak -y install flathub com.github.marktext.marktext
-
-#Install Poedit
-flatpak -y install flathub net.poedit.Poedit
-
-#Install Spotify
-flatpak -y install flathub com.spotify.Client
-
-#Install Thunderbird
-flatpak -y install flathub org.mozilla.Thunderbird
-
 #Install Tutanota
 mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
-#Install Tweaks
-sudo dnf -y install gnome-tweaks
+#Center new windows, add minimize and maximize button, show weekday
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface clock-show-weekday true
-
-#Install Ulauncher
-sudo dnf -y install ulauncher
 
 #Install Adwaita Dark Ulauncher
 mkdir -p ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
 git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
 
 #Configure Ulauncher settings
-curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json > ~/.config/ulauncher/settings.json
+#curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json > ~/.config/ulauncher/settings.json
 
 #Add Ulauncher extensions
-curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json > ~/.config/ulauncher/extensions.json
-
-#Install Visual Studio Code
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-dnf check-update
-sudo dnf -y install code
+#curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json > ~/.config/ulauncher/extensions.json
 
 #Install Printer and Scanner Drivers (MFC-9142CDN)
 mkdir ~/linux-brprinter
@@ -186,78 +119,27 @@ gunzip linux-brprinter-installer-*.*.*-*.gz
 sudo bash linux-brprinter-installer-*.*.*-* MFC-9142CDN
 rm -rf ~/linux-brprinter
 
-#Install adw-gtk3
-sudo wget -P /usr/share/themes/ https://github.com/lassekongo83/adw-gtk3/releases/download/v1.9/adw-gtk3v1-9.tar.xz
-cd /usr/share/themes/
-sudo tar xaf adw-gtk3v1-9.tar.xz
-sudo rm adw-gtk3v1-9.tar.xz
-gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
-
 #Install Firefox GNOME theme
 curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
 
-#Install Papirus icon theme
-wget -qO- https://git.io/papirus-icon-theme-install | sh
-gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
-
-#Install Papirus Folders
-wget -qO- https://git.io/papirus-folders-install | sh
-papirus-folders -C adwaita
-
 #Set Plymouth Theme
+cd ~
 git clone https://github.com/adi1090x/plymouth-themes.git
-sudo dnf -y install plymouth-plugin-script
-sudo cp -r ~/plymouth-themes/pack_3/polaroid /usr/share/plymouth/themes/
-sudo plymouth-set-default-theme -R polaroid
+sudo cp -r ~/plymouth-themes/pack_4/red_loader/ /usr/share/plymouth/themes/
+sudo plymouth-set-default-theme -R red_loader
 rm -rf ~/plymouth-themes
-
-#Install Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-#Configure current shell
-source $HOME/.cargo/env
-
-#Install bat
-cargo install --locked bat
-
-#Install bpytop
-sudo dnf -y install bpytop
-
-#Install cowsay
-sudo dnf -y install cowsay
-
-#Install cronie
-sudo dnf -y install cronie
 
 #Add crontab
 echo "
-55 21 * * * gabriel notify-send \"Power Off\" \"The system will power off automatically in 5 minutes.\"
+55 21 * * * gabriel notify-send \"Ausschalten\" \"Das System schaltet sich automatisch in 5 Minuten ab.\"
 
 00 22 * * * root /usr/sbin/shutdown -h now" | sudo tee -a /etc/crontab
 
-#Install fortune-mod
-sudo dnf -y install fortune-mod
-
-#Install lazygit
-sudo dnf copr enable atim/lazygit -y
-sudo dnf -y install lazygit
-
-#Install lsd
-cargo install lsd
-
-#Install neofetch
-sudo dnf -y install neofetch
-
 #Create config.conf
-mkdir -p ~/.config/neofetch/
-wget -P ~/.config/neofetch/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf
+#mkdir -p ~/.config/neofetch/
+#wget -P ~/.config/neofetch/ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/neofetch/config.conf
 
-#Install vim
-sudo dnf -y install vim
-
-#Install zsh
-sudo dnf -y install zsh
-sudo dnf -y install util-linux-user
+#Change shell to zsh
 chsh -s $(which zsh)
 
 #Install Oh My Zsh!
@@ -278,10 +160,10 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #Update .zshrc
-curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc > ~/.zshrc
+#curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.zshrc > ~/.zshrc
 
 #Create .p10k.zsh
-wget -P ~ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh
+#wget -P ~ https://raw.githubusercontent.com/gabrbrand/dotfiles/main/.p10k.zsh
 
 #Add dnf aliases
 sudo dnf alias add in=install
@@ -301,7 +183,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Super>F'
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'Terminal'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'flatpak run com.raggesilver.BlackBox'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'gnome-terminal'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Control><Alt>T'
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'Thunderbird'
