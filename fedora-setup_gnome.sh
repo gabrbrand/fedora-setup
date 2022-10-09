@@ -44,6 +44,9 @@ sudo dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour r
 #Remove unused GNOME Shell Extensions (Background Logo, GNOME Classic)
 sudo dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
 
+#Install GNOME Shell Extensions (GNOME Pomodoro, User Themes)
+sudo dnf -y install gnome-shell-extension-user-theme gnome-pomodoro
+
 #Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
