@@ -68,8 +68,8 @@ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 dnf check-update
 
-#Install rpm applications (adw-gtk3, bat, bpytop, cowsay, cronie, duf, Foliate, fortune-mod, GIMP, GitHub CLI, KeePassXC, lazygit, lsd, neofetch, plymouth-plugin-script, Tweaks, Ulauncher, util-linux-user, vim, Visual Studio Code, zsh)
-sudo dnf -y install adw-gtk3 bat bpytop code cowsay cronie duf foliate fortune-mod gh gimp gnome-tweaks keepassxc lazygit lsd neofetch plymouth-plugin-script ulauncher util-linux-user vim zsh
+#Install rpm applications (adw-gtk3, bat, bpytop, cowsay, conky, cronie, duf, Foliate, fortune-mod, GIMP, GitHub CLI, KeePassXC, lazygit, lsd, neofetch, Node.js, plymouth-plugin-script, Tweaks, util-linux-user, vim, Visual Studio Code, zsh)
+sudo dnf -y install adw-gtk3 bat bpytop code cowsay conky cronie duf foliate fortune-mod gh gimp gnome-tweaks keepassxc lazygit lsd neofetch nodejs plymouth-plugin-script util-linux-user vim zsh
 
 #Install Anki
 version=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
@@ -83,6 +83,7 @@ rm ~/anki-$version-linux-qt6.tar.zst
 #Git Configuration
 git config --global user.name "Gabriel Brand"
 git config --global user.email gabr.brand@gmail.com
+git config --global init.defaultBranch main
 
 #Set GitHub CLI aliases
 gh alias set rv 'repo view'
@@ -96,20 +97,9 @@ mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
-#Center new windows, add minimize and maximize button, show weekday
+#Center new windows, show weekday
 gsettings set org.gnome.mutter center-new-windows true
-gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.interface clock-show-weekday true
-
-#Install Adwaita Dark Ulauncher
-mkdir -p ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
-git clone https://github.com/gabrbrand/adwaita-dark-ulaucher.git ~/.config/ulauncher/user-themes/adwaita-dark-ulaucher
-
-#Configure Ulauncher settings
-#curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/settings.json > ~/.config/ulauncher/settings.json
-
-#Add Ulauncher extensions
-#curl https://raw.githubusercontent.com/gabrbrand/dotfiles/main/ulauncher/extensions.json > ~/.config/ulauncher/extensions.json
 
 #Install Printer and Scanner Drivers (MFC-9142CDN)
 mkdir ~/linux-brprinter
@@ -172,7 +162,7 @@ sudo dnf alias add if=info
 sudo dnf alias add se=search
 
 #Set keyboard shortcuts
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Dateien'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'nautilus'
@@ -189,7 +179,3 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'Thunderbird'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command 'flatpak run org.mozilla.Thunderbird'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Super>T'
-
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name 'Ulauncher'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command 'ulauncher-toggle'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding '<Control>space'
