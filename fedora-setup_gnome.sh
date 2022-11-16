@@ -15,37 +15,40 @@
 
 #!/bin/bash
 
+echo 'This script requires "sudo" to install system packages. Please enter your password to continue'
+SUDO=sudo
+
 # Optimize DNF Config
-echo "fastestmirror=True
+echo 'fastestmirror=True
 max_parallel_downloads=10
 defaultyes=True
-keepcache=True" | sudo tee -a /etc/dnf/dnf.conf
+keepcache=True' | $SUDO tee -a /etc/dnf/dnf.conf
 
 # Install Updates
-sudo dnf -y update
+$SUDO dnf -y update
 
 # Enable the RPM Fusion repositories
-sudo dnf -y install \
+$SUDO dnf -y install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf -y install \
+$SUDO dnf -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install plugins for playing movies and music
-sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
-sudo dnf -y install lame\* --exclude=lame-devel
-sudo dnf -y group upgrade --with-optional Multimedia
+$SUDO dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
+$SUDO dnf -y install lame\* --exclude=lame-devel
+$SUDO dnf -y group upgrade --with-optional Multimedia
 
 # Change Hostname
-sudo hostnamectl set-hostname "notebook-gabriel"
+$SUDO hostnamectl set-hostname 'notebook-gabriel'
 
-# Remove unused applications (Cheese, Connections, Maps, Photos, Rhythmbox, Tour, Videos)
-sudo dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour rhythmbox totem
+# Remove unused applications
+$SUDO dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour rhythmbox totem
 
-# Remove unused GNOME Shell Extensions (Background Logo, GNOME Classic)
-sudo dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
+# Remove unused GNOME Shell Extensions
+$SUDO dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
 
-# Install GNOME Shell Extensions (GNOME Pomodoro, User Themes)
-sudo dnf -y install gnome-shell-extension-user-theme gnome-pomodoro
+# Install GNOME Shell Extensions
+$SUDO dnf -y install gnome-shell-extension-user-theme gnome-pomodoro
 
 # Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -57,47 +60,47 @@ flatpak remote-modify --enable flathub
 flatpak -y install flathub app.drey.Dialect com.github.marktext.marktext com.github.rafostar.Clapper com.github.unrud.VideoDownloader com.lakoliu.Furtherance com.mattjakeman.ExtensionManager com.spotify.Client io.bassi.Amberol io.github.realmazharhussain.GdmSettings me.dusansimic.DynamicWallpaper net.poedit.Poedit org.bluej.BlueJ org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark org.mozilla.Thunderbird
 
 # Enable adw-gtk3 copr repo
-sudo dnf -y copr enable nickavem/adw-gtk3
+$SUDO dnf -y copr enable nickavem/adw-gtk3
 
 # Add GitHub CLI repo
-sudo dnf install 'dnf-command(config-manager)'
-sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+$SUDO dnf install 'dnf-command(config-manager)'
+$SUDO dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 
 # Install Third Party Repositories
-sudo dnf -y install fedora-workstation-repositories
+$SUDO dnf -y install fedora-workstation-repositories
 
 # Enable the Google Chrome repo
-sudo dnf -y config-manager --set-enabled google-chrome
+$SUDO dnf -y config-manager --set-enabled google-chrome
 
 # Enable lazygit copr repo
-sudo dnf -y copr enable atim/lazygit
+$SUDO dnf -y copr enable atim/lazygit
 
 # Install rpm applications
-sudo dnf -y install adw-gtk3 bat bpytop cowsay cronie duf fortune-mod gh gimp gnome-tweaks google-chrome-stable keepassxc lazygit lsd neofetch nodejs plymouth-plugin-script vim zsh
+$SUDO dnf -y install adw-gtk3 bat bpytop cowsay cronie duf fortune-mod gh gimp gnome-tweaks google-chrome-stable keepassxc lazygit lsd neofetch nodejs plymouth-plugin-script vim zsh
 
 # Install Anki
-anki_version=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-wget -P ~ https://github.com/ankitects/anki/releases/download/$anki_version/anki-$anki_version-linux-qt6.tar.zst
-tar xaf ~/anki-$anki_version-linux-qt6.tar.zst
-cd ~/anki-$anki_version-linux-qt6
-sudo ./install.sh
+ANKI_VERSION=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+wget -P ~ https://github.com/ankitects/anki/releases/download/$ANKI_VERSION/anki-$ANKI_VERSION-linux-qt6.tar.zst
+tar xaf ~/anki-$ANKI_VERSION-linux-qt6.tar.zst
+cd ~/anki-$ANKI_VERSION-linux-qt6
+$SUDO ./install.sh
 cd ~
-rm -rf ~/anki-$anki_version-linux-qt6
-rm ~/anki-$anki_version-linux-qt6.tar.zst
+rm -rf ~/anki-$ANKI_VERSION-linux-qt6
+rm ~/anki-$ANKI_VERSION-linux-qt6.tar.zst
 
 # Install chezmoi
-chezmoi_github_release_version=$(curl --silent "https://api.github.com/repos/twpayne/chezmoi/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-chezmoi_version=$(echo $chezmoi_github_release_version | sed 's/v//')
-wget -P ~ https://github.com/twpayne/chezmoi/releases/download/$chezmoi_github_release_version/chezmoi-$chezmoi_version-x86_64.rpm
-sudo rpm -ivh ~/chezmoi-$chezmoi_version-x86_64.rpm
-rm ~/chezmoi-$chezmoi_version-x86_64.rpm
+CHEZMOI_GITHUB_RELEASE_VERSION=$(curl --silent "https://api.github.com/repos/twpayne/chezmoi/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+CHEZMOI_VERSION=$(echo $CHEZMOI_GITHUB_RELEASE_VERSION | sed 's/v//')
+wget -P ~ https://github.com/twpayne/chezmoi/releases/download/$CHEZMOI_GITHUB_RELEASE_VERSION/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
+$SUDO rpm -ivh ~/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
+rm ~/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
 
 # Install Printer and Scanner Drivers (MFC-9142CDN)
 mkdir ~/linux-brprinter
 wget -P ~/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
 cd ~/linux-brprinter
 gunzip linux-brprinter-installer-2.2.3-1.gz
-sudo bash linux-brprinter-installer-2.2.3-1 MFC-9142CDN
+$SUDO bash linux-brprinter-installer-2.2.3-1 MFC-9142CDN
 cd ~
 rm -rf ~/linux-brprinter
 
@@ -107,29 +110,29 @@ wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux
 chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
 # Add crontab
-echo "
-55 21 * * * gabriel notify-send \"Ausschalten\" \"Das System schaltet sich automatisch in 5 Minuten ab.\"
+echo '
+55 21 * * * gabriel notify-send "Ausschalten" "Das System schaltet sich automatisch in 5 Minuten ab."
 
-00 22 * * * root /usr/sbin/shutdown -h now" | sudo tee -a /etc/crontab
+00 22 * * * root /usr/sbin/shutdown -h now' | $SUDO tee -a /etc/crontab
 
 # Add dnf aliases
-sudo dnf alias add in=install
-sudo dnf alias add rm=remove
-sudo dnf alias add if=info
-sudo dnf alias add se=search
+$SUDO dnf alias add in=install
+$SUDO dnf alias add rm=remove
+$SUDO dnf alias add if=info
+$SUDO dnf alias add se=search
 
 # Show Password Asterisks in Terminal
-sudo sed -i 's/Defaults    env_reset/Defaults    env_reset,pwfeedback/' /etc/sudoers
+$SUDO sed -i 's/Defaults    env_reset/Defaults    env_reset,pwfeedback/' /etc/sudoers
 
 # Set Plymouth Theme
 cd ~
 git clone https://github.com/adi1090x/plymouth-themes.git
-sudo cp -r ~/plymouth-themes/pack_4/red_loader/ /usr/share/plymouth/themes/
-sudo plymouth-set-default-theme -R red_loader
+$SUDO cp -r ~/plymouth-themes/pack_4/red_loader/ /usr/share/plymouth/themes/
+$SUDO plymouth-set-default-theme -R red_loader
 rm -rf ~/plymouth-themes
 
 # Git Configuration
-git config --global user.name "Gabriel Brand"
+git config --global user.name 'Gabriel Brand'
 git config --global user.email gabr.brand@gmail.com
 git config --global init.defaultBranch main
 
@@ -146,6 +149,9 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 
 # Install Firefox GNOME theme
 curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
+
+# Change shell to zsh
+chsh -s $(which zsh)
 
 # Install Oh My Zsh!
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -165,7 +171,7 @@ fc-cache -f -v
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Apply dotfiles
-GITHUB_USERNAME=gabrbrand
+GITHUB_USERNAME='gabrbrand'
 chezmoi init --apply $GITHUB_USERNAME
 
 # Set keyboard shortcuts
