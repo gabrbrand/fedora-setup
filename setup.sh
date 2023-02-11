@@ -127,9 +127,18 @@ git config --global user.name 'Gabriel Brand'
 git config --global user.email gabr.brand@gmail.com
 git config --global init.defaultBranch main
 
+# Install Colloid icon theme
+cd ~
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git
+cd ~/Colloid-icon-theme
+./install.sh -s default -t default
+cd ~
+rm -rf ~/Colloid-icon-theme
+
 # Center new windows, set theme
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Colloid-dark'
 
 # Change shell to zsh
 chsh -s $(which zsh)
