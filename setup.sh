@@ -15,40 +15,37 @@
 
 #!/bin/bash
 
-echo 'This script requires "sudo" to install system packages. Please enter your password to continue'
-SUDO=sudo
-
 # Optimize DNF Config
 echo 'fastestmirror=True
 max_parallel_downloads=10
 defaultyes=True
-keepcache=True' | $SUDO tee -a /etc/dnf/dnf.conf
+keepcache=True' | sudo tee -a /etc/dnf/dnf.conf
 
 # Install Updates
-$SUDO dnf -y update
+sudo dnf -y upgrade
 
 # Enable the RPM Fusion repositories
-$SUDO dnf -y install \
+sudo dnf -y install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-$SUDO dnf -y install \
+sudo dnf -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install plugins for playing movies and music
-$SUDO dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
-$SUDO dnf -y install lame\* --exclude=lame-devel
-$SUDO dnf -y group upgrade --with-optional Multimedia
+sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
+sudo dnf -y install lame\* --exclude=lame-devel
+sudo dnf -y group upgrade --with-optional Multimedia
 
 # Change Hostname
-$SUDO hostnamectl set-hostname 'notebook-gabriel'
+sudo hostnamectl set-hostname 'desktop-gabriel'
 
 # Remove unused applications
-$SUDO dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour rhythmbox totem
+sudo dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour rhythmbox totem
 
 # Remove unused GNOME Shell Extensions
-$SUDO dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
+sudo dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
 
 # Install GNOME Shell Extensions
-$SUDO dnf -y install gnome-shell-extension-user-theme gnome-pomodoro
+sudo dnf -y install gnome-shell-extension-user-theme gnome-pomodoro
 
 # Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -60,30 +57,30 @@ flatpak remote-modify --enable flathub
 flatpak -y install flathub app.drey.Dialect com.github.marktext.marktext com.github.rafostar.Clapper com.github.unrud.VideoDownloader com.lakoliu.Furtherance com.mattjakeman.ExtensionManager com.spotify.Client io.bassi.Amberol io.github.realmazharhussain.GdmSettings me.dusansimic.DynamicWallpaper net.poedit.Poedit org.bluej.BlueJ org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark org.mozilla.Thunderbird
 
 # Enable adw-gtk3 copr repo
-$SUDO dnf -y copr enable nickavem/adw-gtk3
+sudo dnf -y copr enable nickavem/adw-gtk3
 
 # Add GitHub CLI repo
-$SUDO dnf install 'dnf-command(config-manager)'
-$SUDO dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install 'dnf-command(config-manager)'
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 
 # Install Third Party Repositories
-$SUDO dnf -y install fedora-workstation-repositories
+sudo dnf -y install fedora-workstation-repositories
 
 # Enable the Google Chrome repo
-$SUDO dnf -y config-manager --set-enabled google-chrome
+sudo dnf -y config-manager --set-enabled google-chrome
 
 # Enable lazygit copr repo
-$SUDO dnf -y copr enable atim/lazygit
+sudo dnf -y copr enable atim/lazygit
 
 # Install rpm applications
-$SUDO dnf -y install adw-gtk3 bat bpytop cowsay cronie duf fortune-mod gh gimp gnome-tweaks google-chrome-stable keepassxc lazygit lsd neofetch nodejs plymouth-plugin-script vim zsh
+sudo dnf -y install adw-gtk3 bat gh gimp gnome-tweaks google-chrome-stable grub-customizer keepassxc lazygit lsd neofetch plymouth-plugin-script vim zsh
 
 # Install Anki
 ANKI_VERSION=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 wget -P ~ https://github.com/ankitects/anki/releases/download/$ANKI_VERSION/anki-$ANKI_VERSION-linux-qt6.tar.zst
 tar xaf ~/anki-$ANKI_VERSION-linux-qt6.tar.zst
 cd ~/anki-$ANKI_VERSION-linux-qt6
-$SUDO ./install.sh
+sudo ./install.sh
 cd ~
 rm -rf ~/anki-$ANKI_VERSION-linux-qt6
 rm ~/anki-$ANKI_VERSION-linux-qt6.tar.zst
@@ -92,7 +89,7 @@ rm ~/anki-$ANKI_VERSION-linux-qt6.tar.zst
 CHEZMOI_GITHUB_RELEASE_VERSION=$(curl --silent "https://api.github.com/repos/twpayne/chezmoi/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 CHEZMOI_VERSION=$(echo $CHEZMOI_GITHUB_RELEASE_VERSION | sed 's/v//')
 wget -P ~ https://github.com/twpayne/chezmoi/releases/download/$CHEZMOI_GITHUB_RELEASE_VERSION/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
-$SUDO rpm -ivh ~/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
+sudo rpm -ivh ~/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
 rm ~/chezmoi-$CHEZMOI_VERSION-x86_64.rpm
 
 # Install Printer and Scanner Drivers (MFC-9142CDN)
@@ -100,7 +97,7 @@ mkdir ~/linux-brprinter
 wget -P ~/linux-brprinter https://download.brother.com/welcome/dlf006893/linux-brprinter-installer-2.2.3-1.gz
 cd ~/linux-brprinter
 gunzip linux-brprinter-installer-2.2.3-1.gz
-$SUDO bash linux-brprinter-installer-2.2.3-1 MFC-9142CDN
+sudo bash linux-brprinter-installer-2.2.3-1 MFC-9142CDN
 cd ~
 rm -rf ~/linux-brprinter
 
@@ -109,26 +106,20 @@ mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
-# Add crontab
-echo '
-55 21 * * * gabriel notify-send "Ausschalten" "Das System schaltet sich automatisch in 5 Minuten ab."
-
-00 22 * * * root /usr/sbin/shutdown -h now' | $SUDO tee -a /etc/crontab
-
 # Add dnf aliases
-$SUDO dnf alias add in=install
-$SUDO dnf alias add rm=remove
-$SUDO dnf alias add if=info
-$SUDO dnf alias add se=search
+sudo dnf alias add in=install
+sudo dnf alias add rm=remove
+sudo dnf alias add if=info
+sudo dnf alias add se=search
 
 # Show Password Asterisks in Terminal
-$SUDO sed -i 's/Defaults    env_reset/Defaults    env_reset,pwfeedback/' /etc/sudoers
+sudo sed -i 's/Defaults    env_reset/Defaults    env_reset,pwfeedback/' /etc/sudoers
 
 # Set Plymouth Theme
 cd ~
 git clone https://github.com/adi1090x/plymouth-themes.git
-$SUDO cp -r ~/plymouth-themes/pack_4/red_loader/ /usr/share/plymouth/themes/
-$SUDO plymouth-set-default-theme -R red_loader
+sudo cp -r ~/plymouth-themes/pack_3/hud_space/ /usr/share/plymouth/themes/
+sudo plymouth-set-default-theme -R hud_space
 rm -rf ~/plymouth-themes
 
 # Git Configuration
@@ -136,19 +127,9 @@ git config --global user.name 'Gabriel Brand'
 git config --global user.email gabr.brand@gmail.com
 git config --global init.defaultBranch main
 
-# Set GitHub CLI aliases
-gh alias set rv 'repo view'
-gh alias set il 'issue list'
-gh alias set iv 'issue view'
-gh alias set pl 'pr list'
-gh alias set pv 'pr view'
-
-# Center new windows, show weekday
+# Center new windows, set theme
 gsettings set org.gnome.mutter center-new-windows true
-gsettings set org.gnome.desktop.interface clock-show-weekday true
-
-# Install Firefox GNOME theme
-curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
+gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # Change shell to zsh
 chsh -s $(which zsh)
@@ -175,20 +156,12 @@ GITHUB_USERNAME='gabrbrand'
 chezmoi init --apply $GITHUB_USERNAME
 
 # Set keyboard shortcuts
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Dateien'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'nautilus'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>D'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>E'
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Google Chrome'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'google-chrome'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Super>C'
-
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name 'Terminal'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command 'gnome-terminal'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding '<Control><Alt>T'
-
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name 'Thunderbird'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command 'flatpak run org.mozilla.Thunderbird'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding '<Super>T'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'gnome-terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Control><Alt>T'
