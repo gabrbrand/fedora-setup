@@ -129,18 +129,19 @@ cd ~/.config
 wget -O background https://unsplash.com/photos/WMPmZN_1VE8/download\?ixid\=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc2MTM5MTUw\&force\=true
 cd ~
 
-# Install Colloid icon theme
+# Install Fluent icon theme
 cd ~
-git clone https://github.com/vinceliuice/Colloid-icon-theme.git
-cd ~/Colloid-icon-theme
-./install.sh -s default -t default
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git
+cd ~/Fluent-icon-theme
+./install.sh -r
 cd ~
 rm -rf ~/Colloid-icon-theme
 
 # Center new windows, set themes + background
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-gsettings set org.gnome.desktop.interface icon-theme 'Colloid-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Fluent-dark'
+gsettings set org.gnome.desktop.background picture-uri file:///home/gabriel/.config/background
 gsettings set org.gnome.desktop.background picture-uri-dark file:///home/gabriel/.config/background
 
 # Change shell to zsh
