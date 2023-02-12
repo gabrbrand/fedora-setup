@@ -6,6 +6,7 @@
 #                                                       |_|
 # A setup script for Fedora (37)
 # https://github.com/gabrbrand/fedora-setup
+# -> 7 Things You MUST DO After Installing Fedora 36: https://youtu.be/RrRpXs2pkzg
 #
 #   ____ ____
 #  / ___| __ )    Gabriel Brand
@@ -70,7 +71,7 @@ sudo dnf -y config-manager --set-enabled google-chrome
 sudo dnf -y copr enable atim/lazygit
 
 # Install rpm applications
-sudo dnf -y install adw-gtk3 bat gh gimp gnome-tweaks google-chrome-stable grub-customizer keepassxc lazygit lsd neofetch plymouth-plugin-script vim zsh
+sudo dnf -y install adw-gtk3 bat gh gimp gnome-tweaks google-chrome-stable grub-customizer keepassxc lazygit lsd neofetch plymouth-plugin-script util-linux-user vim zsh
 
 # Install Anki
 ANKI_VERSION=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
@@ -103,31 +104,12 @@ mkdir ~/.Applications
 wget -P ~/.Applications https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage
 chmod +x ~/.Applications/tutanota-desktop-linux.AppImage
 
-# Add dnf aliases
-sudo dnf alias add in=install
-sudo dnf alias add rm=remove
-sudo dnf alias add if=info
-sudo dnf alias add se=search
-
-# Show Password Asterisks in Terminal
-sudo sed -i 's/Defaults    env_reset/Defaults    env_reset,pwfeedback/' /etc/sudoers
-
 # Set Plymouth Theme
 cd ~
 git clone https://github.com/adi1090x/plymouth-themes.git
 sudo cp -r ~/plymouth-themes/pack_3/hud_space/ /usr/share/plymouth/themes/
 sudo plymouth-set-default-theme -R hud_space
 rm -rf ~/plymouth-themes
-
-# Git Configuration
-git config --global user.name 'Gabriel Brand'
-git config --global user.email gabr.brand@gmail.com
-git config --global init.defaultBranch main
-
-# Download background
-cd ~/.config
-wget -O background https://unsplash.com/photos/WMPmZN_1VE8/download\?ixid\=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc2MTM5MTUw\&force\=true
-cd ~
 
 # Install Fluent icon theme
 cd ~
@@ -137,12 +119,31 @@ cd ~/Fluent-icon-theme
 cd ~
 rm -rf ~/Colloid-icon-theme
 
+# Download background
+cd ~/.config
+wget -O background https://unsplash.com/photos/WMPmZN_1VE8/download\?ixid\=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc2MTM5MTUw\&force\=true
+cd ~
+
 # Center new windows, set themes + background
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Fluent-dark'
 gsettings set org.gnome.desktop.background picture-uri file:///home/gabriel/.config/background
 gsettings set org.gnome.desktop.background picture-uri-dark file:///home/gabriel/.config/background
+
+# Add dnf aliases
+sudo dnf alias add in=install
+sudo dnf alias add rm=remove
+sudo dnf alias add if=info
+sudo dnf alias add se=search
+
+# Show Password Asterisks in Terminal
+sudo sed -i 's/Defaults    env_reset/Defaults    env_reset,pwfeedback/' /etc/sudoers
+
+# Git Configuration
+git config --global user.name 'Gabriel Brand'
+git config --global user.email gabr.brand@gmail.com
+git config --global init.defaultBranch main
 
 # Change shell to zsh
 chsh -s $(which zsh)
@@ -171,10 +172,10 @@ chezmoi init --apply $GITHUB_USERNAME
 # Set keyboard shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Dateien'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'nautilus'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>E'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'gnome-terminal'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Control><Alt>T'
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Terminal'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'gnome-terminal'
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Control><Alt>T'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Dateien'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'nautilus'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Super>E'
