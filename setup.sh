@@ -44,9 +44,6 @@ sudo dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour r
 # Remove unused GNOME Shell Extensions
 sudo dnf -y remove gnome-classic-session gnome-shell-extension-background-logo
 
-# Install GNOME Shell Extensions
-sudo dnf -y install gnome-shell-extension-user-theme gnome-pomodoro
-
 # Add Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -127,6 +124,11 @@ git config --global user.name 'Gabriel Brand'
 git config --global user.email gabr.brand@gmail.com
 git config --global init.defaultBranch main
 
+# Download background
+cd ~/.config
+wget -O background https://unsplash.com/photos/WMPmZN_1VE8/download\?ixid\=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc2MTM5MTUw\&force\=true
+cd ~
+
 # Install Colloid icon theme
 cd ~
 git clone https://github.com/vinceliuice/Colloid-icon-theme.git
@@ -135,10 +137,11 @@ cd ~/Colloid-icon-theme
 cd ~
 rm -rf ~/Colloid-icon-theme
 
-# Center new windows, set theme
+# Center new windows, set themes + background
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' && gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Colloid-dark'
+gsettings set org.gnome.desktop.background picture-uri-dark file:///home/gabriel/.config/background
 
 # Change shell to zsh
 chsh -s $(which zsh)

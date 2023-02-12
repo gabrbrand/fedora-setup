@@ -1,12 +1,8 @@
 # Fedora Setup
 
-
-
 ![](desktop.png)
 
 Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/WMPmZN_1VE8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
-
 
 ## GNOME Shell Extensions:
 
@@ -42,4 +38,16 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari?utm_source=unsp
 
 - [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 
-- [Colloid-icon-theme](https://github.com/vinceliuice/Colloid-icon-theme)
+- [Fluent-icon-theme](https://github.com/vinceliuice/Fluent-icon-theme)
+
+![](terminal.png)
+
+## Zsh plugins:
+
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+
+## Zsh theme:
+
+[powerlevel10k](https://github.com/romkatv/powerlevel10k)
