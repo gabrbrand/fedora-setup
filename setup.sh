@@ -6,7 +6,7 @@
 #                                                       |_|
 # A setup script for Fedora (37)
 # https://github.com/gabrbrand/fedora-setup
-# -> 7 Things You MUST DO After Installing Fedora 36: https://youtu.be/RrRpXs2pkzg
+# -> 7 Things You MUST DO After Installing Fedora 36 - TechHut (https://youtu.be/RrRpXs2pkzg)
 #
 #   ____ ____
 #  / ___| __ )    Gabriel Brand
