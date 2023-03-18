@@ -62,6 +62,10 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](
 
 - [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
+### Font:
+
+- [Meslo Nerd Font patched for Powerlevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+
 ---
 
 [![7 Things You MUST DO After Installing Fedora 36](https://img.youtube.com/vi/RrRpXs2pkzg/hqdefault.jpg)](https://www.youtube.com/watch?v=RrRpXs2pkzg)
