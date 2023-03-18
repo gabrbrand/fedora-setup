@@ -18,39 +18,39 @@
 
 sudo dnf -y install lolcat &>> ~/setup.log
 
-printf "\n [1/35] Optimize DNF Config...\n" | lolcat
+printf "\n [01/35] Optimize DNF Config...\n" | lolcat
 echo "fastestmirror=True
 max_parallel_downloads=10
 defaultyes=True
 keepcache=True" | sudo tee -a /etc/dnf/dnf.conf &>> ~/setup.log
 
-printf " [2/35] Install Updates...\n" | lolcat
+printf " [02/35] Install Updates...\n" | lolcat
 sudo dnf -y upgrade &>> ~/setup.log
 
-printf " [3/35] Enable the RPM Fusion repositories...\n" | lolcat
+printf " [03/35] Enable the RPM Fusion repositories...\n" | lolcat
 sudo dnf -y install \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm &>> ~/setup.log
 sudo dnf -y install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm &>> ~/setup.log
 
-printf " [4/35] Install plugins for playing movies and music...\n" | lolcat
+printf " [04/35] Install plugins for playing movies and music...\n" | lolcat
 sudo dnf -y install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel &>> ~/setup.log
 sudo dnf -y install lame\* --exclude=lame-devel &>> ~/setup.log
 sudo dnf -y group upgrade --with-optional Multimedia &>> ~/setup.log
 
-printf " [5/35] Change Hostname...\n" | lolcat
+printf " [05/35] Change Hostname...\n" | lolcat
 sudo hostnamectl set-hostname 'desktop-gabriel' &>> ~/setup.log
 
-printf " [6/35] Remove unused applications...\n" | lolcat
+printf " [06/35] Remove unused applications...\n" | lolcat
 sudo dnf -y remove cheese gnome-connections gnome-maps gnome-photos gnome-tour rhythmbox totem &>> ~/setup.log
 
-printf " [7/35] Remove unused GNOME Shell Extensions...\n" | lolcat
+printf " [07/35] Remove unused GNOME Shell Extensions...\n" | lolcat
 sudo dnf -y remove gnome-classic-session gnome-shell-extension-background-logo &>> ~/setup.log
 
-printf " [8/35] Add Flathub remote...\n" | lolcat
+printf " [08/35] Add Flathub remote...\n" | lolcat
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &>> ~/setup.log
 
-printf " [9/35] Enable Flathub remote...\n" | lolcat
+printf " [09/35] Enable Flathub remote...\n" | lolcat
 flatpak remote-modify --enable flathub &>> ~/setup.log
 
 printf " [10/35] Install flatpak applications...\n" | lolcat
