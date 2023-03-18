@@ -44,6 +44,10 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](
 
 - [Fluent-icon-theme](https://github.com/vinceliuice/Fluent-icon-theme)
 
+### Font:
+
+- [Poppins](https://fonts.google.com/specimen/Poppins)
+
 ## Terminal
 
 ![](terminal.png)
@@ -56,7 +60,7 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](
 
 ### Zsh theme:
 
-[powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
 ---
 
