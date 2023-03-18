@@ -73,7 +73,7 @@ printf " [15/35] Enable lazygit copr repo...\n" | lolcat
 sudo dnf -y copr enable atim/lazygit &>> ~/setup.log
 
 printf " [16/35] Install rpm applications...\n" | lolcat
-sudo dnf -y install adw-gtk3 bat gh gimp gnome-tweaks google-chrome-stable grub-customizer keepassxc lazygit lsd neofetch plymouth-plugin-script util-linux-user vim zsh zstd &>> ~/setup.log
+sudo dnf -y install adw-gtk3 bat gh gimp gnome-tweaks google-chrome-stable grub-customizer keepassxc lazygit libgda libgda-sqlite lsd neofetch plymouth-plugin-script util-linux-user vim zsh zstd &>> ~/setup.log
 
 printf " [17/35] Install Anki...\n" | lolcat
 ANKI_VERSION=$(curl --silent "https://api.github.com/repos/ankitects/anki/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
