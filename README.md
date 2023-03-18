@@ -1,4 +1,4 @@
-## <u>Desktop</u>
+## Desktop
 
 ![](desktop.png)
 
@@ -44,7 +44,7 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari?utm_source=unsp
 
 - [Fluent-icon-theme](https://github.com/vinceliuice/Fluent-icon-theme)
 
-## <u>Terminal</u>
+## Terminal
 
 ![](terminal.png)
 
@@ -57,3 +57,9 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari?utm_source=unsp
 ### Zsh theme:
 
 [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+
+---
+
+[![7 Things You MUST DO After Installing Fedora 36](https://img.youtube.com/vi/RrRpXs2pkzg/hqdefault.jpg)](https://www.youtube.com/watch?v=RrRpXs2pkzg)
+
+**7 Things You MUST DO After Installing Fedora 36** - *TechHut*
