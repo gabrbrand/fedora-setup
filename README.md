@@ -14,8 +14,6 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari?utm_source=unsp
 
 - [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
 
-- [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
-
 - [Custom Hot Corners - Extended](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/)
 
 - [Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
@@ -27,6 +25,8 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari?utm_source=unsp
 - [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
 
 - [Just Perfection](https://extensions.gnome.org/extension/3843/just-perfection/)
+
+- [Pano - Clipboard Manager](https://extensions.gnome.org/extension/5278/pano/)
 
 - [Quick Settings Tweaker](https://extensions.gnome.org/extension/5446/quick-settings-tweaker/)
 
