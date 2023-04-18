@@ -2,7 +2,7 @@
 
 ![](desktop.png)
 
-Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](https://unsplash.com/photos/W3kxCizLWvo)
+Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](https://unsplash.com/photos/VlgYg9QZd0E)
 
 ### GNOME Shell Extensions:
 
