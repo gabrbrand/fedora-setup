@@ -2,37 +2,29 @@
 
 ![](desktop.png)
 
-Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](https://unsplash.com/photos/VlgYg9QZd0E)
+[Background](https://gitlab.gnome.org/GNOME/gnome-backgrounds/-/blob/gnome-45/backgrounds/truchet-d.jpg?ref_type=heads)
 
 ### GNOME Shell Extensions:
 
 - [App Icons Taskbar](https://extensions.gnome.org/extension/4944/app-icons-taskbar/)
 
-- [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
+- [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
 
-- [Burn My Windows](https://extensions.gnome.org/extension/4679/burn-my-windows/)
+- [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/)
 
 - [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
 
+- [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
+
 - [Custom Hot Corners - Extended](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/)
-
-- [Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
-
-- [Dotspaces](https://extensions.gnome.org/extension/5347/dotspaces/)
 
 - [Extension List](https://extensions.gnome.org/extension/3088/extension-list/)
 
-- [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
-
 - [Just Perfection](https://extensions.gnome.org/extension/3843/just-perfection/)
-
-- [Pano - Clipboard Manager](https://extensions.gnome.org/extension/5278/pano/)
-
-- [Quick Settings Tweaker](https://extensions.gnome.org/extension/5446/quick-settings-tweaker/)
 
 - [Removable Drive Menu](https://extensions.gnome.org/extension/7/removable-drive-menu/)
 
-- [Rounded Window Corners](https://extensions.gnome.org/extension/5237/rounded-window-corners/)
+- [System Monitor](https://gitlab.gnome.org/GNOME/gnome-shell-extensions/-/tree/main/extensions/system-monitor?ref_type=heads)
 
 - [Tiling Assistant](https://extensions.gnome.org/extension/3733/tiling-assistant/)
 
@@ -46,7 +38,7 @@ Background by [Pramod Tiwari](https://unsplash.com/@pramodtiwari) on [Unsplash](
 
 ### Font:
 
-- [Poppins](https://fonts.google.com/specimen/Poppins)
+- [Inter](https://fonts.google.com/specimen/Inter)
 
 ## Terminal
 
