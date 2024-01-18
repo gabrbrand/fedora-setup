@@ -34,8 +34,6 @@
 
 - [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)
 
-- [Fluent-icon-theme](https://github.com/vinceliuice/Fluent-icon-theme)
-
 ### Font:
 
 - [Inter](https://fonts.google.com/specimen/Inter)
